@@ -28,11 +28,11 @@ export default function Footer() {
             <a href="/#como-funciona" className="hover:text-black transition-colors">
               Como funciona
             </a>
-            <a href="/#muro-do-amor" className="hover:text-black transition-colors">
-              Depoimentos
-            </a>
             <a href="/#faq" className="hover:text-black transition-colors">
               FAQ
+            </a>
+            <a href="mailto:geral@bazaja.com" className="hover:text-black transition-colors">
+              geral@bazaja.com
             </a>
           </div>
 
