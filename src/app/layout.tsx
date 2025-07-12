@@ -1,17 +1,8 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Inter, Inter_Tight } from "next/font/google";
+import { Inter, Inter_Tight } from "next/font/google";
 import Header from "@/components/Header";
 import "./globals.css";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+import Footer from "@/components/Footer";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -43,11 +34,11 @@ export const metadata = {
     title: "Baza - Transporte recorrente em Angola",
     description:
       "Chega de lutar por táxi todo dia. Com o Baza, tu tens transporte garantido todos os dias com rotas fixas e seguras.",
-    url: "https://baza.ao",
+    url: "https://bazaja.com",
     siteName: "Baza",
     images: [
       {
-        url: "https://baza.ao/og-image.jpg",
+        url: "https://bazaja.com/favicon.png",
         width: 1200,
         height: 630,
         alt: "Baza - Transporte urbano em Angola",
@@ -64,12 +55,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt">
+    <html lang="pt" className={inter_tight.variable}>
       <body
         className={`${inter.variable} antialiased`}
       >
         <Header/>
         {children}
+        <Footer />
       </body>
     </html>
   );

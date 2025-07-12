@@ -6,9 +6,12 @@ export default function HeroSection() {
   return (
     <section className="relative bg-[#f5f5f5] overflow-hidden">
       {/* Background lines */}
+      <div className="absolute inset-0 z-0 pointer-events-none max-w-6xl mx-auto">
+        <div className="absolute top-0 left-[10px] md:left-[-34px] w-px h-full bg-black/5" />
+        <div className="absolute top-0 right-[10px] md:right-[-34px] w-px h-full bg-black/5" />
+      </div>
+
       <div className="absolute inset-0 z-0 pointer-events-none">
-        <div className="absolute top-0 left-[3%] sm:left-[18%] w-px h-full bg-black/5" />
-        <div className="absolute top-0 right-[3%] sm:right-[18%] w-px h-full bg-black/5" />
         <div className="absolute bottom-0 left-0 w-full h-px bg-black/5" />
       </div>
 
@@ -33,16 +36,13 @@ export default function HeroSection() {
                 </p>
 
                 <div className="space-y-4">
-                  <Button className="w-full bg-black text-white hover:bg-gray-800 rounded-lg py-3 flex items-center justify-center space-x-3">
-                    <a
-                      href="#"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="underline-offset-2"
-                    >
-                      Entrar na lista de espera
-                    </a>
-                  </Button>
+                  <a
+                    href="/waitlist"
+                    rel="noopener noreferrer"
+                    className="w-full bg-black text-white hover:bg-gray-800 rounded-lg py-3 flex items-center justify-center space-x-3"
+                  >
+                    Entrar na lista de espera
+                  </a>
 
                   <Button
                     className="w-full bg-gray-100 text-gray-700 hover:bg-gray-200 border-gray-200 rounded-lg py-3 flex items-center justify-center space-x-2"

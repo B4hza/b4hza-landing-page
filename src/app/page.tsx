@@ -17,7 +17,6 @@ const Home = function () {
       <FaqSection />
       <TeamSection />
       <SupportSection />
-      <Footer />
     </main>
   )
 }  

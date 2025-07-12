@@ -1,14 +1,14 @@
 const people = [
   {
     name: "William Humbwavali",
-    role: "Co-Founder / CEO",
+    role: "Cofundador / CEO",
     imageUrl:
       "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/340px-Default_pfp.svg.png",
     linkedinUrl: "https://www.linkedin.com/in/williamhumbwavali/",
   },
   {
     name: "Mário Coxe",
-    role: "Co-Founder / COO",
+    role: "Cofundador / COO",
     imageUrl:
       "https://media.licdn.com/dms/image/v2/D4D03AQFyCYuSuLrO4w/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1721071538609?e=1757548800&v=beta&t=ZOVLyjubjwOUYaoFvpylWELHSv2HqrJwQw6TaZ6LQJk",
     linkedinUrl: "https://www.linkedin.com/in/mariocoxe/",
@@ -19,9 +19,9 @@ export default function TeamSection() {
   return (
     <section className="bg-[#f5f5f5] py-24 sm:py-32 relative" id="criadores">
       {/* Linhas ao redor */}
-      <div className="absolute inset-0 z-0 pointer-events-none">
-        <div className="absolute top-0 left-[3%] md:left-[18%] w-px h-full bg-black/5" />
-        <div className="absolute top-0 right-[3%] md:right-[18%] w-px h-full bg-black/5" />
+      <div className="absolute inset-0 z-0 pointer-events-none max-w-6xl mx-auto">
+        <div className="absolute top-0 left-[10px] md:left-[-34px] w-px h-full bg-black/5" />
+        <div className="absolute top-0 right-[10px] md:right-[-34px] w-px h-full bg-black/5" />
       </div>
 
       <div className="mx-auto max-w-6xl px-6 lg:px-8 grid grid-cols-1 xl:grid-cols-12 gap-16">

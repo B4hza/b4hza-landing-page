@@ -6,9 +6,9 @@ export default function Footer() {
   return (
     <footer className="relative bg-[#f5f5f5] border-t border-gray-200 py-10 px-6 sm:px-8">
       {/* Linhas de fundo */}
-      <div className="absolute inset-0 z-0 pointer-events-none">
-        <div className="absolute top-0 left-[3%] md:left-[18%] w-px h-full bg-black/5" />
-        <div className="absolute top-0 right-[3%] md:right-[18%] w-px h-full bg-black/5" />
+      <div className="absolute inset-0 z-0 pointer-events-none max-w-6xl mx-auto">
+        <div className="absolute top-0 left-[10px] md:left-[-34px] w-px h-full bg-black/5" />
+        <div className="absolute top-0 right-[10px] md:right-[-34px] w-px h-full bg-black/5" />
       </div>
 
       {/* Conteúdo principal */}
@@ -25,13 +25,13 @@ export default function Footer() {
         <div className="flex flex-col sm:flex-row gap-6 sm:items-center text-base text-gray-600">
           {/* Navegação */}
           <div className="flex flex-col sm:flex-row gap-4">
-            <a href="#como-funciona" className="hover:text-black transition-colors">
+            <a href="/#como-funciona" className="hover:text-black transition-colors">
               Como funciona
             </a>
-            <a href="#muro-do-amor" className="hover:text-black transition-colors">
+            <a href="/#muro-do-amor" className="hover:text-black transition-colors">
               Depoimentos
             </a>
-            <a href="#faq" className="hover:text-black transition-colors">
+            <a href="/#faq" className="hover:text-black transition-colors">
               FAQ
             </a>
           </div>
@@ -39,7 +39,7 @@ export default function Footer() {
           {/* Redes sociais */}
           <div className="flex space-x-4">
             <a
-              href="https://www.linkedin.com/company/baza"
+              href="https://www.linkedin.com/company/bazaja/"
               target="_blank"
               rel="noopener noreferrer"
               className="hover:text-black text-gray-500"
@@ -47,7 +47,7 @@ export default function Footer() {
               <FaLinkedin className="w-5 h-5" />
             </a>
             <a
-              href="https://www.instagram.com/bazaapp"
+              href="https://www.instagram.com/bazaja_/"
               target="_blank"
               rel="noopener noreferrer"
               className="hover:text-black text-gray-500"

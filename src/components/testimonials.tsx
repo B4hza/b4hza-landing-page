@@ -4,9 +4,11 @@ export default function TestimonialsPage() {
   return (
     <section className="relative bg-[#f5f5f5] overflow-hidden py-10" id="muro-do-amor">
       {/* Linhas de fundo */}
+      <div className="absolute inset-0 z-0 pointer-events-none max-w-6xl mx-auto">
+        <div className="absolute top-0 left-[10px] md:left-[-34px] w-px h-full bg-black/5" />
+        <div className="absolute top-0 right-[10px] md:right-[-34px] w-px h-full bg-black/5" />
+      </div>
       <div className="absolute inset-0 z-0 pointer-events-none">
-        <div className="absolute top-0 left-[3%] md:left-[18%] w-px h-full bg-black/5" />
-        <div className="absolute top-0 right-[3%] md:right-[18%] w-px h-full bg-black/5" />
         <div className="absolute bottom-0 left-0 w-full h-px bg-black/5" />
       </div>
 
@@ -52,9 +54,9 @@ export default function TestimonialsPage() {
               texto: "Estou ansiosa pela app. Ela vai me ajudar muito a ir para a universidade. E depois com a subida do táxi, tem sido um problema para mim, mas com o Baza espero que isso seja coisa do passado.",
             },
             {
-              nome: "Joelma Domingos",
-              username: "@joelmad",
-              texto: "Achei genial a ideia do Baza. Saber que vou ter transporte certo todos os dias dá uma paz enorme.",
+              nome: "Milton Caluaco",
+              username: "@miltoncaluaco",
+              texto: "Espero que o Baza ofereça pontualidade, segurança, conforto e uma mobilidade mais prática, com menos tempo de espera e mais garantia no transporte.",
             },
             {
               nome: "Carlos Vemba",

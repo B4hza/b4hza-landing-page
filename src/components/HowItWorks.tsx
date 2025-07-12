@@ -18,9 +18,11 @@ export default function HowItWorks() {
     return (
         <section className="relative bg-[#f5f5f5] overflow-hidden py-10" id="como-funciona">
             {/* Linhas de fundo */}
+            <div className="absolute inset-0 z-0 pointer-events-none max-w-6xl mx-auto">
+                <div className="absolute top-0 left-[10px] md:left-[-34px] w-px h-full bg-black/5" />
+                <div className="absolute top-0 right-[10px] md:right-[-34px] w-px h-full bg-black/5" />
+            </div>
             <div className="absolute inset-0 z-0 pointer-events-none">
-                <div className="absolute top-0 left-[3%] md:left-[18%] w-px h-full bg-black/5" />
-                <div className="absolute top-0 right-[3%] md:right-[18%] w-px h-full bg-black/5" />
                 <div className="absolute bottom-0 left-0 w-full h-px bg-black/5" />
             </div>
 
