@@ -1,10 +1,16 @@
 'use client'
 
-import { useForm, ValidationError } from '@formspree/react'
-import React from 'react'
+import React, { useState } from 'react'
 
 export default function WaitlistForm() {
-  const [state, handleSubmit] = useForm('mzzvppvn') // <-- ID do teu form no Formspree
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    phone: '',
+  })
+
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitted, setSubmitted] = useState(false)
 
   const inputClass =
     'w-full h-11 bg-black/5 rounded-lg px-4 border-2 border-transparent text-base transition-all duration-300 ease-[cubic-bezier(0.25,0.01,0.25,1)] focus:outline-none focus:border-black hover:border-black'
@@ -12,11 +18,36 @@ export default function WaitlistForm() {
   const labelClass =
     'block mb-1 text-sm font-semibold text-black/60 transition-colors duration-300 ease-[cubic-bezier(0.25,0.01,0.25,1)] peer-focus:text-black/75 group-hover:text-black/75'
 
-  /* ---------- Mensagem de sucesso ---------- */
-  if (state.succeeded) {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value })
+  }
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setIsSubmitting(true)
+
+    try {
+      await fetch(`https://script.google.com/macros/s/AKfycbyqMMvhGZjT-nk8lu6j3k_Xm5lHwM4WGBAy2n5bXh4vZZR3dJNdRnXlAK8DMaycDNtBgw/exec?ts=${Date.now()}`, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      })
+
+      setSubmitted(true)
+    } catch (error) {
+      console.error('Erro ao enviar:', error)
+    }
+
+    setIsSubmitting(false)
+  }
+
+  // ---------- Mensagem de sucesso ----------
+  if (submitted) {
     return (
       <section className="relative bg-[#f5f5f5] overflow-hidden">
-        {/* linhas decorativas */}
         <div className="absolute inset-0 z-0 pointer-events-none">
           <div className="absolute top-0 left-[3%] sm:left-[18%] w-px h-full bg-black/5" />
           <div className="absolute top-0 right-[3%] sm:right-[18%] w-px h-full bg-black/5" />
@@ -40,7 +71,7 @@ export default function WaitlistForm() {
     )
   }
 
-  /* ---------- Formulário ---------- */
+  // ---------- Formulário ----------
   return (
     <section className="relative bg-[#f5f5f5] overflow-hidden">
       <div className="absolute inset-0 z-0 pointer-events-none">
@@ -76,8 +107,9 @@ export default function WaitlistForm() {
                       required
                       className={`${inputClass} peer`}
                       placeholder="Seu nome"
+                      onChange={handleChange}
+                      value={formData.name}
                     />
-                    {/* Formspree não valida este campo por padrão; podes manter apenas o required */}
                   </div>
 
                   <div className="input-group group w-full">
@@ -91,8 +123,9 @@ export default function WaitlistForm() {
                       required
                       className={`${inputClass} peer`}
                       placeholder="Seu email"
+                      onChange={handleChange}
+                      value={formData.email}
                     />
-                    <ValidationError prefix="Email" field="email" errors={state.errors} />
                   </div>
 
                   <div className="input-group group w-full">
@@ -105,19 +138,19 @@ export default function WaitlistForm() {
                       name="phone"
                       className={`${inputClass} peer`}
                       placeholder="Seu número de telefone"
+                      onChange={handleChange}
+                      value={formData.phone}
                     />
                   </div>
-
-                  <ValidationError field="message" errors={state.errors} />
                 </div>
 
                 <div className="pt-4">
                   <button
                     type="submit"
-                    disabled={state.submitting}
+                    disabled={isSubmitting}
                     className="bg-black text-white hover:bg-gray-800 rounded-2xl py-3 px-5 transition disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
                   >
-                    {state.submitting ? 'A processar…' : 'Entrar na lista'}
+                    {isSubmitting ? 'A processar…' : 'Entrar na lista'}
                   </button>
                 </div>
               </form>
