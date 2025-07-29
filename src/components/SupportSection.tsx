@@ -1,6 +1,7 @@
 import Button from "./ui/button"
 import { ChevronDown, ChevronRight } from "lucide-react"
 import Image from "next/image"
+import Link from "next/link"
 
 export default function WaitListSection() {
   return (
@@ -29,12 +30,12 @@ export default function WaitListSection() {
                   Entra na lista e descobre em primeira mão.
                 </p>
 
-                <a
+                <Link
                   href="/waitlist"
                   className="text-sm underline underline-offset-2 text-black hover:text-gray-800 space-x-2"
                 >
                   <span>Entrar na lista de espera </span>
-                </a>
+                </Link>
               </div>
 
               {/* Right Column - Illustration */}

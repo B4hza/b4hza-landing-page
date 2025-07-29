@@ -1,6 +1,7 @@
 import Button from "./ui/button"
-import { ChevronRight } from "lucide-react"
+import { ChevronRight} from "lucide-react"
 import Image from "next/image"
+import Link from "next/link"
 
 export default function HeroSection() {
   return (
@@ -36,13 +37,12 @@ export default function HeroSection() {
                 </p>
 
                 <div className="space-y-4">
-                  <a
+                  <Link
                     href="/waitlist"
-                    rel="noopener noreferrer"
                     className="w-full bg-black text-white hover:bg-gray-800 rounded-lg py-3 flex items-center justify-center space-x-3"
                   >
                     Entrar na lista de espera
-                  </a>
+                  </Link>
 
                   <Button
                     className="w-full bg-gray-100 text-gray-700 hover:bg-gray-200 border-gray-200 rounded-lg py-3 flex items-center justify-center space-x-2"

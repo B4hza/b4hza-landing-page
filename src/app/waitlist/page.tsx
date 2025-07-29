@@ -48,9 +48,14 @@ export default function WaitlistForm() {
   if (submitted) {
     return (
       <section className="relative bg-[#f5f5f5] overflow-hidden">
+        {/* Background lines */}
+        <div className="absolute inset-0 z-0 pointer-events-none max-w-6xl mx-auto">
+          <div className="absolute top-0 left-[10px] md:left-[-34px] w-px h-full bg-black/5" />
+          <div className="absolute top-0 right-[10px] md:right-[-34px] w-px h-full bg-black/5" />
+        </div>
+
         <div className="absolute inset-0 z-0 pointer-events-none">
-          <div className="absolute top-0 left-[3%] sm:left-[18%] w-px h-full bg-black/5" />
-          <div className="absolute top-0 right-[3%] sm:right-[18%] w-px h-full bg-black/5" />
+          <div className="absolute bottom-0 left-0 w-full h-px bg-black/5" />
         </div>
 
         <div className="relative z-10 px-4 sm:px-6 py-12">
@@ -74,9 +79,14 @@ export default function WaitlistForm() {
   // ---------- Formulário ----------
   return (
     <section className="relative bg-[#f5f5f5] overflow-hidden">
+      {/* Background lines */}
+      <div className="absolute inset-0 z-0 pointer-events-none max-w-6xl mx-auto">
+        <div className="absolute top-0 left-[10px] md:left-[-34px] w-px h-full bg-black/5" />
+        <div className="absolute top-0 right-[10px] md:right-[-34px] w-px h-full bg-black/5" />
+      </div>
+
       <div className="absolute inset-0 z-0 pointer-events-none">
-        <div className="absolute top-0 left-[3%] sm:left-[18%] w-px h-full bg-black/5" />
-        <div className="absolute top-0 right-[3%] sm:right-[18%] w-px h-full bg-black/5" />
+        <div className="absolute bottom-0 left-0 w-full h-px bg-black/5" />
       </div>
 
       <div className="relative z-10 px-4 sm:px-6 py-12">

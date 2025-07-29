@@ -14,22 +14,36 @@ export default function Header() {
         </div>
 
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between space-y-4 md:space-y-0">
-          {/* Logo (aparece só no desktop) */}
-          <Link href="/" className="text-3xl md:text-4xl font-semibold text-black font-inter-tight hidden md:block">
+          {/* Logo (desktop) */}
+          <Link
+            href="/"
+            className="text-3xl md:text-4xl font-semibold text-black font-inter-tight hidden md:block"
+          >
             Baza
           </Link>
 
-          {/* Navegação (só no desktop) */}
+          {/* Navegação (desktop) */}
           <nav className="hidden md:flex items-center space-x-8">
-            <a href="/#como-funciona" className="text-gray-700 hover:text-black">Como funciona</a>
-            <a href="/#muro-do-amor" className="text-gray-700 hover:text-black">Depoimentos</a>
-            <a href="/#faq" className="text-gray-700 hover:text-black">FAQ</a>
-            <a href="/#criadores" className="text-gray-700 hover:text-black">Fundadores</a>
+            <Link href="/#como-funciona" className="text-gray-700 hover:text-black">
+              Como funciona
+            </Link>
+            <Link href="/#muro-do-amor" className="text-gray-700 hover:text-black">
+              Depoimentos
+            </Link>
+            <Link href="/#faq" className="text-gray-700 hover:text-black">
+              FAQ
+            </Link>
+            <Link href="/#criadores" className="text-gray-700 hover:text-black">
+              Fundadores
+            </Link>
           </nav>
 
-          {/* Botão (link) - só desktop */}
+          {/* Botão (desktop) */}
           <div className="hidden md:flex items-center space-x-4">
-            <Link href="/waitlist" className="bg-black text-white hover:bg-gray-800 rounded-xl px-4 py-2 flex items-center space-x-2">
+            <Link
+              href="/waitlist"
+              className="bg-black text-white hover:bg-gray-800 rounded-xl px-4 py-2 flex items-center space-x-2"
+            >
               <span>Quero o Baza</span>
               <ChevronRight className="w-4 h-4" />
             </Link>
@@ -37,13 +51,19 @@ export default function Header() {
         </div>
       </header>
 
-      {/* Botão fixo no topo - só mobile */}
+      {/* Botão fixo mobile */}
       <div className="fixed top-0 inset-x-0 z-20 md:hidden bg-white border-b border-gray-200 px-6 py-4 mb-4">
         <div className="max-w-6xl mx-auto flex justify-between items-center">
-          <Link href="/" className="text-3xl font-semibold text-black font-inter-tight md:hidden">
+          <Link
+            href="/"
+            className="text-3xl font-semibold text-black font-inter-tight md:hidden"
+          >
             Baza
           </Link>
-          <Link href="/waitlist" className="bg-black text-white hover:bg-gray-800 rounded-2xl px-5 py-3 flex items-center">
+          <Link
+            href="/waitlist"
+            className="bg-black text-white hover:bg-gray-800 rounded-2xl px-5 py-3 flex items-center"
+          >
             <span className="text-sm">Quero o Baza</span>
             <ChevronRight className="w-4 h-4 ml-2 text-gray-400" />
           </Link>
