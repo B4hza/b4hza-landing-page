@@ -4,7 +4,7 @@ import { FaLinkedin, FaInstagram, FaXTwitter, FaTiktok } from "react-icons/fa6"
 
 export default function Footer() {
   return (
-    <footer className="relative bg-[#f5f5f5] border-t border-gray-200 py-10 px-6 sm:px-8">
+    <footer className="relative bg-[#f5f5f5] py-10 px-6 sm:px-8">
       {/* Linhas de fundo */}
       <div className="absolute inset-0 z-0 pointer-events-none max-w-6xl mx-auto">
         <div className="absolute top-0 left-[10px] md:left-[-34px] w-px h-full bg-black/5" />
