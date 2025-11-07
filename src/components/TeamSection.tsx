@@ -10,7 +10,7 @@ const people = [
     name: "Mário Coxe",
     role: "Cofundador / COO",
     imageUrl:
-      "https://media.licdn.com/dms/image/v2/D4D03AQFyCYuSuLrO4w/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1721071538609?e=1757548800&v=beta&t=ZOVLyjubjwOUYaoFvpylWELHSv2HqrJwQw6TaZ6LQJk",
+      "https://media.licdn.com/dms/image/v2/D4D03AQG6FkQL5LBtag/profile-displayphoto-crop_800_800/B4DZmYzDJYIEAI-/0/1759205143876?e=1764201600&v=beta&t=wRUd1E0_JXwjr22aYUEz5YrRVRTtP3tuwxHHUrJbGc0",
     linkedinUrl: "https://www.linkedin.com/in/mariocoxe/",
   },
 ]
