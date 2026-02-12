@@ -39,9 +39,9 @@ export default function TestimonialsPage() {
               texto: "O Baza vai facilitar a minha vida porque eu vivo numa zona longe da universidade e a minha universidade é na cidade então com o Baza já não terei transtorno e nem dificuldades em chegar sempre na hora e voltar em segurança",
             },
             {
-              nome: "Dulce Monteiro",
-              username: "@dulcemonteiro",
-              texto: "Vai facilitar e muito, chegar cedo no trabalho, evitar transtorno e até mesmo uma taxa única das passagens.",
+              nome: "Emeliano Coxe",
+              username: "@emeliano",
+              texto: "Vai facilitar e muito, chegar cedo no trabalho, evitar transtorno. Todos os dias perco muito tempo à espera de transporte e ainda chego stressado. Com o Baza, já sei que terei o meu lugar garantido e posso planear melhor o meu dia.",
             },
             {
               nome: "Bráulio Ralha",

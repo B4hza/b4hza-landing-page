@@ -10,8 +10,15 @@ const people = [
     name: "Mário Coxe",
     role: "Cofundador / COO",
     imageUrl:
-      "https://media.licdn.com/dms/image/v2/D4D03AQG6FkQL5LBtag/profile-displayphoto-crop_800_800/B4DZmYzDJYIEAI-/0/1759205143876?e=1764201600&v=beta&t=wRUd1E0_JXwjr22aYUEz5YrRVRTtP3tuwxHHUrJbGc0",
+      "https://media.licdn.com/dms/image/v2/D4D03AQG6FkQL5LBtag/profile-displayphoto-scale_100_100/B4DZmYzDJYIEAc-/0/1759205143958?e=1772668800&v=beta&t=1ZO-C_9m9IeokVUvDA-56Mbi8Q71rNc0bne6la3IUsA",
     linkedinUrl: "https://www.linkedin.com/in/mariocoxe/",
+  },
+  {
+    name: "Evandro Eusébio",
+    role: "CTO",
+    imageUrl:
+      "https://media.licdn.com/dms/image/v2/D4D03AQFaeE8fy7VgtA/profile-displayphoto-scale_100_100/B4DZqnevKVJ4Ac-/0/1763746444863?e=1772668800&v=beta&t=QBbhArcboiCJQbGfqMO1ryh6PYJ5tvjSCUlkDxhwyQY",
+    linkedinUrl: "https://www.linkedin.com/in/evandro-eus%C3%A9bio-121a5a26a/",
   },
 ]
 

@@ -37,8 +37,7 @@ export default function HowItWorks() {
                 </h2>
 
                 <p className="text-gray-500 text-lg mt-4 max-w-2xl mx-auto">
-                    Tu acordas cedo, corres pra paragem, esperas no sol, empurras-te pra entrar num carro lotado.
-                    Todo santo dia. E ainda pagas caro. Com o Baza, isso acaba. Tu ganhas tempo, conforto e paz.
+                    O Baza é um serviço de transporte partilhado por assinatura que te permite reservar o teu lugar com antecedência. Escolhes os teus horários e trajetos, subscreves um plano semanal ou mensal, e tens transporte garantido todos os dias — com pontualidade, conforto e preço justo.
                 </p>
             </div>
 
