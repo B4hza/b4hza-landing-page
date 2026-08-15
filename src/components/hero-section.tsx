@@ -6,14 +6,9 @@ import Link from "next/link"
 export default function HeroSection() {
   return (
     <section className="relative overflow-hidden">
-      {/* Guide lines sutis atrás do card */}
-      <div className="pointer-events-none absolute inset-0 hidden md:block">
-        <div className="absolute top-0 left-[10%] w-px h-full bg-black/[0.06]" />
-        <div className="absolute top-0 right-[10%] w-px h-full bg-black/[0.06]" />
-      </div>
 
       {/* Main Content */}
-      <div className="relative z-10 px-4 sm:px-6 py-12">
+      <div className="relative z-10 px-4 sm:px-6 py-2 sm:py-12">
         <div className="max-w-6xl mx-auto">
           <div className="relative bg-white rounded-2xl px-6 md:px-12 py-10 sm:py-20 shadow-[0_1px_2px_rgba(0,0,0,0.04)] mt-9 sm:mt-0 overflow-hidden">
             {/* Blob decorativo atrás da imagem */}

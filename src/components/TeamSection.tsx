@@ -19,7 +19,7 @@ const people = [
 
 export default function TeamSection() {
   return (
-    <section className="py-20 sm:py-28 overflow-hidden" id="criadores">
+    <section className="py-10 sm:py-20 overflow-hidden" id="criadores">
       <div className="mx-auto max-w-6xl px-6 lg:px-8 grid grid-cols-1 xl:grid-cols-12 gap-16">
         {/* Coluna 5/12: Texto */}
         <div className="xl:col-span-5 max-w-2xl xl:max-w-none mx-auto text-center xl:text-left">

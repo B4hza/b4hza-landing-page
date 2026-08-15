@@ -57,7 +57,7 @@ function getIniciais(nome: string) {
 
 export default function TestimonialsPage() {
   return (
-    <section className="relative overflow-hidden py-20" id="muro-do-amor">
+    <section className="relative overflow-hidden py-sm-20 py-8" id="muro-do-amor">
       <div className="relative z-10">
         {/* Header */}
         <div className="pb-5 text-center">

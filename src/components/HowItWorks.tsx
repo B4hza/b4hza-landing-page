@@ -8,7 +8,7 @@ const diasHorarios = [
 
 export default function HowItWorks() {
   return (
-    <section className="relative overflow-hidden py-20" id="como-funciona">
+    <section className="relative overflow-hidden py-15 py-sm-20" id="como-funciona">
       {/* Cabeçalho */}
       <div className="relative z-10 text-center mb-16 px-4">
         <div className="inline-flex items-center gap-2 rounded-full bg-white px-4 py-1.5 text-sm font-medium text-gray-600 mb-4">

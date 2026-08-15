@@ -6,7 +6,7 @@ export default function WaitListSection() {
   return (
     <section className="overflow-hidden">
       {/* Main Content */}
-      <div className="relative z-10 px-4 sm:px-6 py-12">
+      <div className="relative z-10 px-4 sm:px-6 py-sm-12 py-5 pb-10">
         <div className="max-w-6xl mx-auto">
           <div className="bg-white rounded-2xl px-6 md:px-12 py-10 sm:py-20 shadow-[0_1px_2px_rgba(0,0,0,0.04)]">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-16 items-center">
