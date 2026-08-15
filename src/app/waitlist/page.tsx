@@ -34,7 +34,13 @@ export default function WaitlistForm() {
   const totalSteps = 3
 
   const inputClass =
-    'w-full h-11 bg-black/5 rounded-xl px-4 border-2 border-transparent text-base transition-all duration-300 ease-[cubic-bezier(0.25,0.01,0.25,1)] focus:outline-none focus:border-black hover:border-black/20'
+    'w-full min-w-0 h-11 bg-black/5 rounded-xl px-4 border-2 border-transparent text-base transition-all duration-300 ease-[cubic-bezier(0.25,0.01,0.25,1)] focus:outline-none focus:border-black hover:border-black/20'
+
+  // Classe específica para inputs de hora.
+  // O iOS reserva espaço para os controles internos do type="time",
+  // por isso usamos min-w-0, padding menor no mobile e appearance-none.
+  const timeInputClass =
+    'w-full min-w-0 h-11 bg-black/5 rounded-xl px-2 sm:px-4 border-2 border-transparent text-sm sm:text-base transition-all duration-300 ease-[cubic-bezier(0.25,0.01,0.25,1)] focus:outline-none focus:border-black hover:border-black/20 appearance-none overflow-hidden'
 
   const labelClass =
     'block mb-1.5 text-sm font-semibold text-black/60 transition-colors duration-300 ease-[cubic-bezier(0.25,0.01,0.25,1)] peer-focus:text-black/75 group-hover:text-black/75'
@@ -175,7 +181,10 @@ export default function WaitlistForm() {
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-16 items-center">
 
+              {/* ================================= */}
               {/* LADO ESQUERDO */}
+              {/* ================================= */}
+
               <div className="space-y-6">
 
                 <div className="inline-flex items-center gap-2 rounded-full bg-gray-50 px-4 py-1.5 text-sm font-medium text-gray-600">
@@ -198,10 +207,16 @@ export default function WaitlistForm() {
 
               </div>
 
+              {/* ================================= */}
               {/* FORMULÁRIO */}
-              <form onSubmit={handleSubmit} className="w-full">
+              {/* ================================= */}
 
+              <form onSubmit={handleSubmit} className="w-full min-w-0">
+
+                {/* ================================= */}
                 {/* BARRA DE PROGRESSO */}
+                {/* ================================= */}
+
                 <div className="mb-8">
 
                   <div className="flex items-center justify-between mb-3">
@@ -242,8 +257,11 @@ export default function WaitlistForm() {
                       </p>
                     </div>
 
-                    <div className="input-group group w-full">
-                      <label htmlFor="name" className={`${labelClass} peer`}>
+                    <div className="input-group group w-full min-w-0">
+                      <label
+                        htmlFor="name"
+                        className={`${labelClass} peer`}
+                      >
                         Nome
                       </label>
 
@@ -259,8 +277,11 @@ export default function WaitlistForm() {
                       />
                     </div>
 
-                    <div className="input-group group w-full">
-                      <label htmlFor="email" className={`${labelClass} peer`}>
+                    <div className="input-group group w-full min-w-0">
+                      <label
+                        htmlFor="email"
+                        className={`${labelClass} peer`}
+                      >
                         Email
                       </label>
 
@@ -276,8 +297,11 @@ export default function WaitlistForm() {
                       />
                     </div>
 
-                    <div className="input-group group w-full">
-                      <label htmlFor="phone" className={`${labelClass} peer`}>
+                    <div className="input-group group w-full min-w-0">
+                      <label
+                        htmlFor="phone"
+                        className={`${labelClass} peer`}
+                      >
                         Telefone
                       </label>
 
@@ -319,7 +343,7 @@ export default function WaitlistForm() {
                         Quero ser
                       </span>
 
-                      <div className="grid grid-cols-2 gap-3">
+                      <div className="grid grid-cols-2 gap-3 min-w-0">
 
                         {roles.map(({ value, label }) => {
 
@@ -335,7 +359,7 @@ export default function WaitlistForm() {
                                   role: value,
                                 })
                               }
-                              className={`flex items-center gap-2.5 rounded-xl border-2 py-3 px-4 text-sm font-medium transition-all duration-200 ${
+                              className={`min-w-0 flex items-center gap-2.5 rounded-xl border-2 py-3 px-4 text-sm font-medium transition-all duration-200 ${
                                 isSelected
                                   ? 'border-black bg-white text-black'
                                   : 'border-transparent bg-black/5 text-gray-600 hover:border-black/20'
@@ -354,7 +378,9 @@ export default function WaitlistForm() {
                                 )}
                               </span>
 
-                              {label}
+                              <span className="truncate">
+                                {label}
+                              </span>
 
                             </button>
                           )
@@ -384,7 +410,7 @@ export default function WaitlistForm() {
                       </p>
                     </div>
 
-                    <div className="input-group group w-full">
+                    <div className="input-group group w-full min-w-0">
                       <label
                         htmlFor="origin"
                         className={`${labelClass} peer`}
@@ -404,7 +430,7 @@ export default function WaitlistForm() {
                       />
                     </div>
 
-                    <div className="input-group group w-full">
+                    <div className="input-group group w-full min-w-0">
                       <label
                         htmlFor="destination"
                         className={`${labelClass} peer`}
@@ -424,9 +450,11 @@ export default function WaitlistForm() {
                       />
                     </div>
 
-                    <div className="grid grid-cols-2 gap-3">
+                    {/* HORÁRIOS DO PASSAGEIRO */}
 
-                      <div className="input-group group w-full">
+                    <div className="grid grid-cols-2 gap-2 sm:gap-3 min-w-0">
+
+                      <div className="input-group group w-full min-w-0">
                         <label
                           htmlFor="departureTime"
                           className={`${labelClass} peer`}
@@ -439,13 +467,13 @@ export default function WaitlistForm() {
                           type="time"
                           name="departureTime"
                           required
-                          className={`${inputClass} peer`}
+                          className={`${timeInputClass} peer`}
                           onChange={handleChange}
                           value={formData.departureTime}
                         />
                       </div>
 
-                      <div className="input-group group w-full">
+                      <div className="input-group group w-full min-w-0">
                         <label
                           htmlFor="returnTime"
                           className={`${labelClass} peer`}
@@ -458,7 +486,7 @@ export default function WaitlistForm() {
                           type="time"
                           name="returnTime"
                           required
-                          className={`${inputClass} peer`}
+                          className={`${timeInputClass} peer`}
                           onChange={handleChange}
                           value={formData.returnTime}
                         />
@@ -466,7 +494,7 @@ export default function WaitlistForm() {
 
                     </div>
 
-                    <div className="input-group group w-full">
+                    <div className="input-group group w-full min-w-0">
                       <label
                         htmlFor="frequency"
                         className={`${labelClass} peer`}
@@ -482,11 +510,25 @@ export default function WaitlistForm() {
                         onChange={handleChange}
                         value={formData.frequency}
                       >
-                        <option value="">Seleciona uma opção</option>
-                        <option value="1-2">1–2 dias</option>
-                        <option value="3-4">3–4 dias</option>
-                        <option value="5">5 dias</option>
-                        <option value="6-7">6–7 dias</option>
+                        <option value="">
+                          Seleciona uma opção
+                        </option>
+
+                        <option value="1-2">
+                          1–2 dias
+                        </option>
+
+                        <option value="3-4">
+                          3–4 dias
+                        </option>
+
+                        <option value="5">
+                          5 dias
+                        </option>
+
+                        <option value="6-7">
+                          6–7 dias
+                        </option>
                       </select>
                     </div>
 
@@ -510,7 +552,7 @@ export default function WaitlistForm() {
                       </p>
                     </div>
 
-                    <div className="input-group group w-full">
+                    <div className="input-group group w-full min-w-0">
                       <label
                         htmlFor="driverOrigin"
                         className={`${labelClass} peer`}
@@ -530,7 +572,7 @@ export default function WaitlistForm() {
                       />
                     </div>
 
-                    <div className="input-group group w-full">
+                    <div className="input-group group w-full min-w-0">
                       <label
                         htmlFor="driverDestination"
                         className={`${labelClass} peer`}
@@ -550,9 +592,11 @@ export default function WaitlistForm() {
                       />
                     </div>
 
-                    <div className="grid grid-cols-2 gap-3">
+                    {/* HORÁRIOS DO MOTORISTA */}
 
-                      <div className="input-group group w-full">
+                    <div className="grid grid-cols-2 gap-2 sm:gap-3 min-w-0">
+
+                      <div className="input-group group w-full min-w-0">
                         <label
                           htmlFor="driverStartTime"
                           className={`${labelClass} peer`}
@@ -565,13 +609,13 @@ export default function WaitlistForm() {
                           type="time"
                           name="driverStartTime"
                           required
-                          className={`${inputClass} peer`}
+                          className={`${timeInputClass} peer`}
                           onChange={handleChange}
                           value={formData.driverStartTime}
                         />
                       </div>
 
-                      <div className="input-group group w-full">
+                      <div className="input-group group w-full min-w-0">
                         <label
                           htmlFor="driverEndTime"
                           className={`${labelClass} peer`}
@@ -584,7 +628,7 @@ export default function WaitlistForm() {
                           type="time"
                           name="driverEndTime"
                           required
-                          className={`${inputClass} peer`}
+                          className={`${timeInputClass} peer`}
                           onChange={handleChange}
                           value={formData.driverEndTime}
                         />
@@ -592,7 +636,7 @@ export default function WaitlistForm() {
 
                     </div>
 
-                    <div className="input-group group w-full">
+                    <div className="input-group group w-full min-w-0">
                       <label
                         htmlFor="vehicleCapacity"
                         className={`${labelClass} peer`}
@@ -630,7 +674,7 @@ export default function WaitlistForm() {
                       </select>
                     </div>
 
-                    <div className="input-group group w-full">
+                    <div className="input-group group w-full min-w-0">
                       <label
                         htmlFor="availability"
                         className={`${labelClass} peer`}
@@ -710,6 +754,7 @@ export default function WaitlistForm() {
                       ) : (
                         <>
                           Entrar na lista
+
                           <ChevronRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
                         </>
                       )}
