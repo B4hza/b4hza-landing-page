@@ -67,7 +67,7 @@ export default function HeroSection() {
               {/* Right Column - Responsive Image */}
               <div className="hidden lg:flex justify-center">
                 <Image
-                  src="/undraw_order-ride_4gaq.svg"
+                  src="/iMockup.svg"
                   alt="Mockup do Baza"
                   width={600}
                   height={600}
