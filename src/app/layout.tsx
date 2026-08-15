@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Inter_Tight } from "next/font/google";
+import { Inter, Inter_Tight, Archivo } from "next/font/google";
 import Header from "@/components/Header";
 import "./globals.css";
 import Footer from "@/components/Footer";
@@ -13,6 +13,11 @@ const inter_tight = Inter_Tight({
   variable: "--font-inter-tight",
   subsets: ["latin"],
 });
+
+const archivo = Archivo({
+  variable: "--font-archivo",
+  subsets: ["latin"],
+})
 
 export const metadata = {
   title: "Baza - Transporte confiável e recorrente em Angola",
@@ -49,16 +54,32 @@ export const metadata = {
   },
 }
 
+function GuideGrid() {
+  return (
+    <div
+      className="pointer-events-none absolute inset-0"
+      style={{
+        backgroundImage: `
+          linear-gradient(to right, rgba(0, 0, 0, 0.02) 1px, transparent 1px),
+          linear-gradient(to bottom, rgba(0, 0, 0, 0.02) 1px, transparent 1px)
+        `,
+        backgroundSize: "calc(100% / 30) 80px",
+      }}
+    />
+  );
+}
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt" className={inter_tight.variable}>
+    <html lang="pt" className={archivo.variable}>
       <body
-        className={`${inter.variable} antialiased`}
+        className={`${archivo.variable} antialiased relative`}
       >
+        <GuideGrid />
         <Header/>
         {children}
         <Footer />

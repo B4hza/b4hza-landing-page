@@ -23,10 +23,10 @@
    }
  }
 
- body {
-   font-family: 'Inter', Arial, Helvetica, sans-serif;
-   background-color: #f4f4f4;
- }
+body {
+  font-family: 'Archivo', Arial, Helvetica, sans-serif;
+  background-color: #f5f5f4;
+}
 
  h1,
  h2,
@@ -34,9 +34,9 @@
  h4,
  h5,
  h6 {
-   font-family: var(--font-inter-tight), sans-serif;
+   font-family: var(--font-archivo), sans-serif;
  }
 
- .font-inter-tight {
-   font-family: var(--font-inter-tight), sans-serif;
+ .font-archivo {
+   font-family: var(--font-archivo), sans-serif;
  }

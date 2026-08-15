@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { Plus, X } from 'lucide-react'
+import { CircleHelp, Plus } from 'lucide-react'
 
 export default function FaqSection() {
     const [openIndex, setOpenIndex] = useState<number | null>(0)
@@ -52,73 +52,79 @@ export default function FaqSection() {
             answer:
                 'Sim. O Baza vai oferecer duas opções: o plano compartilhado, onde divides o transporte com outras pessoas que fazem rotas semelhantes (sem precisares conhecê-las), e o plano privado, onde o carro é só para ti. O plano compartilhado é mais económico, ideal para quem quer poupar e ainda ter um transporte confortável e garantido. Já o plano privado tem um custo mais elevado, mas oferece exclusividade e flexibilidade total. Assim, podes escolher o que se encaixa melhor no teu bolso e na tua rotina.',
         },
-
-    ];
+    ]
 
     return (
-        <section className="relative bg-[#f5f5f5] py-10 overflow-hidden" id='faq'>
-            {/* Linhas ao redor */}
-            <div className="absolute inset-0 z-0 pointer-events-none max-w-6xl mx-auto">
-                <div className="absolute top-0 left-[10px] md:left-[-34px] w-px h-full bg-black/5" />
-                <div className="absolute top-0 right-[10px] md:right-[-34px] w-px h-full bg-black/5" />
-            </div>
-            <div className="absolute inset-0 z-0 pointer-events-none">
-                <div className="absolute bottom-0 left-0 w-full h-px bg-black/5" />
-            </div>
-
+        <section className="py-20 overflow-hidden" id="faq">
             {/* Cabeçalho */}
             <div className="relative z-10 text-center mb-16 px-4">
-                <div className="inline-flex items-center gap-2 text-sm text-gray-600 mb-4">
-                    Perguntas Frequentes
+                <div className="inline-flex items-center gap-2 rounded-full bg-white px-4 py-1.5 text-sm font-medium text-gray-600 mb-4">
+                    <CircleHelp className="h-3.5 w-3.5 text-orange-500" strokeWidth={2.5} />
+                    Perguntas frequentes
                 </div>
 
-                <h2 className="text-3xl md:text-5xl font-bold text-black leading-tight max-w-4xl mx-auto">
-                    Tudo o que precisas saber sobre o Baza
+                <h2 className="text-3xl md:text-5xl font-bold text-black leading-tight tracking-tight max-w-4xl mx-auto text-balance">
+                    Tudo o que precisas saber <br /> sobre o Baza
                 </h2>
 
-                <p className="text-gray-500 text-lg mt-4 max-w-2xl mx-auto">
+                <p className="text-gray-500 text-lg mt-4 max-w-2xl mx-auto text-balance">
                     Respostas diretas às dúvidas mais comuns da nossa comunidade.
                 </p>
             </div>
 
+            {/* Conteúdo principal */}
+            <div className="relative z-10 px-4">
+                <div className="max-w-3xl mx-auto space-y-3">
+                    {faqs.map((faq, index) => {
+                        const isOpen = openIndex === index
 
-            <div className='relative z-10 px-6'>
-                {/* Conteúdo principal */}
-                <div className="relative z-10 max-w-6xl mx-auto">
-                    <div>
-                        {faqs.map((faq, index) => {
-                            const isOpen = openIndex === index
-                            const isLast = index === faqs.length - 1
-
-                            return (
-                                <div
-                                    key={index}
-                                    className={`${!isLast ? 'border-b border-gray-200' : ''}`}
+                        return (
+                            <div
+                                key={index}
+                                className={`rounded-2xl border bg-white transition-colors ${
+                                    isOpen ? 'border-black/15' : 'border-black/[0.06]'
+                                }`}
+                            >
+                                <button
+                                    onClick={() => setOpenIndex(isOpen ? null : index)}
+                                    className="w-full flex items-center justify-between gap-4 px-5 sm:px-6 py-5 text-left cursor-pointer"
+                                    aria-expanded={isOpen}
                                 >
-                                    <button
-                                        onClick={() => setOpenIndex(isOpen ? null : index)}
-                                        className="w-full flex justify-between items-center px-2 sm:px-4 py-5 text-left cursor-pointer"
+                                    <span
+                                        className={`text-base sm:text-lg font-medium transition-colors ${
+                                            isOpen ? 'text-black' : 'text-gray-900'
+                                        }`}
                                     >
-                                        <span className="text-xl font-medium text-gray-900">
-                                            {faq.question}
-                                        </span>
-                                        {isOpen ? (
-                                            <X className="w-5 h-5 text-gray-500" />
-                                        ) : (
-                                            <Plus className="w-5 h-5 text-gray-500" />
-                                        )}
-                                    </button>
-
-                                    <div
-                                        className={`px-2 sm:px-4 overflow-hidden transition-all duration-300 ease-in-out ${isOpen ? 'max-h-96 opacity-100 py-2' : 'max-h-0 opacity-0'
+                                        {faq.question}
+                                    </span>
+                                    <span
+                                        className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-full transition-colors ${
+                                            isOpen ? 'bg-black text-white' : 'bg-gray-100 text-gray-500'
+                                        }`}
+                                    >
+                                        <Plus
+                                            className={`h-4 w-4 transition-transform duration-300 ${
+                                                isOpen ? 'rotate-45' : 'rotate-0'
                                             }`}
-                                    >
-                                        <p className="text-gray-600 leading-relaxed">{faq.answer}</p>
+                                            strokeWidth={2.5}
+                                        />
+                                    </span>
+                                </button>
+
+                                <div
+                                    className={`grid transition-all duration-300 ease-in-out ${
+                                        isOpen ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'
+                                    }`}
+                                >
+                                    <div className="overflow-hidden">
+                                        <p className="text-gray-500 leading-relaxed px-5 sm:px-6 pb-5 pr-10">
+                                            {faq.answer}
+                                        </p>
                                     </div>
                                 </div>
-                            )
-                        })}
-                    </div>
+                            </div>
+                        )
+                    })}
                 </div>
             </div>
         </section>

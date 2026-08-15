@@ -1,51 +1,46 @@
-import Button from "./ui/button"
-import { ChevronDown, ChevronRight } from "lucide-react"
+import { ChevronRight } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 
 export default function WaitListSection() {
   return (
-    <section className="relative bg-[#f5f5f5] overflow-hidden">
-      {/* Background lines */}
-      <div className="absolute inset-0 z-0 pointer-events-none max-w-6xl mx-auto">
-        <div className="absolute top-0 left-[10px] md:left-[-34px] w-px h-full bg-black/5" />
-        <div className="absolute top-0 right-[10px] md:right-[-34px] w-px h-full bg-black/5" />
-      </div>
-      <div className="absolute inset-0 z-0 pointer-events-none">
-        <div className="absolute top-0 left-0 w-full h-px bg-black/5" />
-      </div>
-
+    <section className="overflow-hidden">
       {/* Main Content */}
       <div className="relative z-10 px-4 sm:px-6 py-12">
         <div className="max-w-6xl mx-auto">
-          <div className="bg-white rounded-2xl px-6 md:px-12 py-10 sm:py-20 border border-gray-200">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-16">
+          <div className="bg-white rounded-2xl px-6 md:px-12 py-10 sm:py-20 shadow-[0_1px_2px_rgba(0,0,0,0.04)]">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-16 items-center">
               {/* Left Column */}
-              <div className="space-y-8">
-                <h1 className="text-3xl mb-2 md:text-5xl font-bold text-black leading-tight">
+              <div className="space-y-6">
+                <div className="inline-flex items-center gap-2 rounded-full bg-gray-50 px-4 py-1.5 text-sm font-medium text-gray-600">
+                  <span className="h-1.5 w-1.5 rounded-full bg-orange-500" />
+                  Não fiques de fora
+                </div>
+
+                <h1 className="text-3xl md:text-5xl font-bold text-black leading-tight tracking-tight text-balance">
                   Chega de correria — vem com o Baza
                 </h1>
 
-                <p className="text-base md:text-lg text-gray-600 leading-relaxed">
+                <p className="text-base md:text-lg text-gray-500 leading-relaxed">
                   Entra na lista e descobre em primeira mão.
                 </p>
 
                 <Link
                   href="/waitlist"
-                  className="text-sm underline underline-offset-2 text-black hover:text-gray-800 space-x-2"
+                  className="group inline-flex items-center gap-2 bg-black text-white hover:bg-gray-800 rounded-xl py-3.5 px-6 font-medium transition-colors"
                 >
-                  <span>Entrar na lista de espera </span>
+                  Entrar na lista de espera
+                  <ChevronRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
                 </Link>
               </div>
 
               {/* Right Column - Illustration */}
               <div className="hidden lg:flex justify-center">
                 <Image
-                  src="/undraw_fingerprint_kdwq.svg"
+                  src="/undraw_comment-sent_8c4r.svg"
                   alt="Ilustração de comunidade online"
-                  width={400}
-                  height={400}
-                  className="w-full max-w-sm h-auto"
+                  width={180}
+                  height={180}
                   priority
                 />
               </div>

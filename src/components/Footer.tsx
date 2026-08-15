@@ -1,18 +1,14 @@
 "use client"
 
 import { FaLinkedin, FaInstagram, FaXTwitter, FaTiktok } from "react-icons/fa6"
+import { Linkedin, Instagram } from 'lucide-react'
 
 export default function Footer() {
   return (
-    <footer className="relative bg-[#f5f5f5] py-10 px-6 sm:px-8">
-      {/* Linhas de fundo */}
-      <div className="absolute inset-0 z-0 pointer-events-none max-w-6xl mx-auto">
-        <div className="absolute top-0 left-[10px] md:left-[-34px] w-px h-full bg-black/5" />
-        <div className="absolute top-0 right-[10px] md:right-[-34px] w-px h-full bg-black/5" />
-      </div>
+    <footer className="py-10 px-6 sm:px-8">
 
       {/* Conteúdo principal */}
-      <div className="relative z-10 max-w-6xl mx-auto flex flex-col md:flex-row items-start md:items-center justify-between gap-6 text-left">
+      <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-start md:items-center justify-between gap-6 text-left">
         {/* Coluna esquerda */}
         <div className="max-w-md">
           <h2 className="text-3xl font-semibold text-gray-900 tracking-tight">Baza</h2>
@@ -44,7 +40,7 @@ export default function Footer() {
               rel="noopener noreferrer"
               className="hover:text-black text-gray-500"
             >
-              <FaLinkedin className="w-5 h-5" />
+              <Linkedin className="h-4 w-4" strokeWidth={2} />
             </a>
             <a
               href="https://www.instagram.com/bazaja_/"
@@ -52,13 +48,13 @@ export default function Footer() {
               rel="noopener noreferrer"
               className="hover:text-black text-gray-500"
             >
-              <FaInstagram className="w-5 h-5" />
+              <Instagram className="h-4 w-4" strokeWidth={2} />
             </a>
           </div>
         </div>
       </div>
 
-      <p className="text-sm text-gray-500 mt-10 mx-0 md:mx-auto border-t border-gray-200 pt-4 w-full md:w-[40%] text-left md:text-center">
+      <p className="text-sm text-gray-500 mt-10 mx-0 md:mx-auto pt-4 w-full md:w-[40%] text-left md:text-center">
         © {new Date().getFullYear()} Baza. Todos os direitos reservados.
       </p>
     </footer>
