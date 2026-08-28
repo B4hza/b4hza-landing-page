@@ -20,12 +20,6 @@ const testemunhos = [
       "O que mais espero do Baza é confiabilidade. Saber que vou ter um transporte à hora certa, todos os dias, sem ter que lutar por um táxi ou ficar muito tempo na paragem, já seria uma grande melhoria.",
   },
   {
-    nome: "Zeugma Angélico",
-    username: "@zeu-angelico",
-    texto:
-      "Estou muito ansiosa pela chegada do app. Vai ajudar-me imenso nas minhas deslocações para a universidade e tornar o meu dia a dia muito mais fácil. Espero que, com o Baza, ir para a universidade seja finalmente mais simples e tranquilo.",
-  },
-  {
     nome: "Milton Caluaco",
     username: "@miltoncaluaco",
     texto:
