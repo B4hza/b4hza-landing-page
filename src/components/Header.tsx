@@ -36,7 +36,7 @@ export default function Header() {
         {/* Botão */}
         <Link
           href="/waitlist"
-          className="group inline-flex items-center gap-1.5 bg-black text-white hover:bg-gray-800 rounded-full pl-4 pr-3.5 py-2.5 text-sm font-medium transition-colors"
+          className="group inline-flex items-center gap-1.5 bg-black text-white hover:bg-gray-800 rounded-2xl pl-4 pr-3.5 py-2.5 text-sm font-medium transition-colors"
         >
           Quero o Baza
           <ChevronRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />

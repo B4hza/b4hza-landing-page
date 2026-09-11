@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Inter_Tight, Archivo } from "next/font/google";
+import { Inter, Inter_Tight, Archivo, Google_Sans } from "next/font/google";
 import Header from "@/components/Header";
 import "./globals.css";
 import Footer from "@/components/Footer";
@@ -17,6 +17,11 @@ const inter_tight = Inter_Tight({
 const archivo = Archivo({
   variable: "--font-archivo",
   subsets: ["latin"],
+})
+
+const google_sans = Google_Sans({
+  variable: "--font-google-sans",
+  subsets: ["latin"]
 })
 
 export const metadata = {
@@ -77,7 +82,7 @@ export default function RootLayout({
   return (
     <html lang="pt" className={archivo.variable}>
       <body
-        className={`${archivo.variable} antialiased relative`}
+        className={`${archivo.variable} ${inter.variable} ${google_sans.variable} antialiased relative`}
       >
         <GuideGrid />
         <Header/>
