@@ -20,7 +20,16 @@ export default function Footer() {
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
           {/* Coluna esquerda */}
           <div className="max-w-md">
-            <h2 className="text-2xl font-semibold text-black tracking-tight">Baza</h2>
+            <div className="flex items-center gap-2">
+              <img
+                src="/baza-removebg-preview.png"
+                alt="Baza"
+                className="w-8 h-8 object-contain"
+              />
+              <h2 className="text-2xl font-semibold text-black tracking-tight">
+                Baza
+              </h2>
+            </div>
             <p className="text-base text-gray-500 mt-2 leading-relaxed">
               O Baza transforma o transporte diário numa experiência mais simples e previsível, conectando estudantes e trabalhadores a motoristas de confiança em rotas seguras, fixas e acessíveis.
             </p>

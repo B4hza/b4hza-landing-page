@@ -16,7 +16,15 @@ export default function Header() {
     <header className="sticky top-4 z-20 px-4 sm:px-6">
       <div className="max-w-6xl mx-auto flex items-center justify-between gap-6 rounded-3xl bg-white/80 backdrop-blur-md shadow-[0_1px_2px_rgba(0,0,0,0.04)] pl-6 pr-3 py-3">
         {/* Logo */}
-        <Link href="/" className="text-xl md:text-2xl font-semibold text-black font-inter-tight">
+        <Link
+          href="/"
+          className="flex items-center gap-2 text-xl md:text-2xl font-semibold text-black font-inter-tight"
+        >
+          <img
+            src="/baza.png"
+            alt="Baza"
+            className="w-8 h-8 object-contain"
+          />
           Baza
         </Link>
 
