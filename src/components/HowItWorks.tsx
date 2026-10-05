@@ -23,10 +23,8 @@ export default function HowItWorks() {
         </h2>
 
         <p className="text-gray-500 text-lg mt-4 max-w-2xl mx-auto text-balance">
-          O Baza é um serviço de transporte partilhado por assinatura que te permite reservar o teu
-          lugar com antecedência. Escolhes os teus horários e trajetos, subscreves um plano semanal
-          ou mensal, e tens transporte garantido todos os dias — com pontualidade, conforto e preço
-          justo.
+          Escolhes o teu trajeto e horário, subscreves um plano semanal ou mensal e garantimos o teu transporte nos dias definidos — com lugar reservado, horários previsíveis, conforto e preço justo.
+
         </p>
       </div>
 

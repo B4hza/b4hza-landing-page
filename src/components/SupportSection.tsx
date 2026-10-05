@@ -14,7 +14,7 @@ export default function WaitListSection() {
               <div className="space-y-6">
 
                 <h2 className="text-2xl md:text-5xl font-bold text-black leading-tight tracking-tight text-balance">
-                  Menos correria. Mais Baza.
+                  Menos correria. Mais previsibilidade
                 </h2>
 
                 <p className="text-base md:text-lg text-gray-500 leading-relaxed">
