@@ -1,105 +1,154 @@
-'use client'
+"use client"
 
-import React, { useState } from 'react'
-import { Check, ChevronLeft, ChevronRight } from 'lucide-react'
+import { useState } from "react"
+import {
+  ArrowLeft,
+  ArrowUpRight,
+  Bell,
+  Check,
+  CarFront,
+  MapPin,
+  ShieldCheck,
+  User,
+  type LucideIcon,
+} from "lucide-react"
+import Link from "next/link"
+
+const ENDPOINT =
+  "https://script.google.com/macros/s/AKfycbz2HdwAsgHKhwNJTU0F97WA-XYtHBG1OdG2zkLW7rEvVbs5xudbYNGO2EGHC2H3e3yoeg/exec"
+
+const TOTAL_STEPS = 3
+
+const initialData = {
+  name: "",
+  email: "",
+  phone: "",
+  role: "",
+
+  // Passageiro
+  origin: "",
+  destination: "",
+  departureTime: "",
+  returnTime: "",
+  frequency: "",
+
+  // Motorista
+  driverOrigin: "",
+  driverDestination: "",
+  driverStartTime: "",
+  driverEndTime: "",
+  vehicleCapacity: "",
+  availability: "",
+}
+
+type FormData = typeof initialData
+
+const roles: { value: string; label: string; hint: string; icon: LucideIcon }[] = [
+  { value: "passenger", label: "Passageiro", hint: "Faço o mesmo trajecto com frequência", icon: User },
+  { value: "driver", label: "Motorista", hint: "Quero operar uma rota", icon: CarFront },
+]
+
+const benefits = [
+  { icon: Bell, text: "Avisamos-te quando a primeira rota abrir" },
+  { icon: MapPin, text: "O teu trajecto ajuda-nos a escolher as próximas rotas" },
+  { icon: ShieldCheck, text: "Sem custos e sem compromisso" },
+]
+
+const eyebrow = "text-sm font-medium text-gray-600 uppercase tracking-wide"
+
+const fieldClass =
+  "h-11 w-full min-w-0 appearance-none rounded-xl border border-gray-200/70 bg-gray-50 px-4 text-base text-gray-900 outline-none transition-colors placeholder:text-gray-400 hover:border-gray-300 focus:border-black focus:bg-white focus:ring-1 focus:ring-black"
+
+const labelClass = "mb-1.5 block text-sm font-medium text-gray-700"
+
+function Field({
+  label,
+  id,
+  className = "",
+  ...props
+}: { label: string; id: string } & React.InputHTMLAttributes<HTMLInputElement>) {
+  return (
+    <div className="min-w-0">
+      <label htmlFor={id} className={labelClass}>
+        {label}
+      </label>
+      <input id={id} name={id} required className={`${fieldClass} ${className}`} {...props} />
+    </div>
+  )
+}
+
+function SelectField({
+  label,
+  id,
+  placeholder,
+  options,
+  ...props
+}: {
+  label: string
+  id: string
+  placeholder: string
+  options: { value: string; label: string }[]
+} & React.SelectHTMLAttributes<HTMLSelectElement>) {
+  return (
+    <div className="min-w-0">
+      <label htmlFor={id} className={labelClass}>
+        {label}
+      </label>
+      <select id={id} name={id} required className={fieldClass} {...props}>
+        <option value="">{placeholder}</option>
+        {options.map((o) => (
+          <option key={o.value} value={o.value}>
+            {o.label}
+          </option>
+        ))}
+      </select>
+    </div>
+  )
+}
+
+function StepHeader({ title, description }: { title: string; description: string }) {
+  return (
+    <div className="mb-6">
+      <h2 className="text-xl font-semibold text-black">{title}</h2>
+      <p className="mt-1 text-sm text-gray-500">{description}</p>
+    </div>
+  )
+}
 
 export default function WaitlistForm() {
   const [step, setStep] = useState(1)
-
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    role: '',
-
-    // Passageiro
-    origin: '',
-    destination: '',
-    departureTime: '',
-    returnTime: '',
-    frequency: '',
-
-    // Motorista
-    driverOrigin: '',
-    driverDestination: '',
-    driverStartTime: '',
-    driverEndTime: '',
-    vehicleCapacity: '',
-    availability: '',
-  })
-
+  const [formData, setFormData] = useState<FormData>(initialData)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitted, setSubmitted] = useState(false)
-
-  const totalSteps = 3
-
-  const inputClass =
-    'w-full min-w-0 h-11 bg-black/5 rounded-xl px-4 border-2 border-transparent text-base transition-all duration-300 ease-[cubic-bezier(0.25,0.01,0.25,1)] focus:outline-none focus:border-black hover:border-black/20'
-
-  // Classe específica para inputs de hora.
-  // O iOS reserva espaço para os controles internos do type="time",
-  // por isso usamos min-w-0, padding menor no mobile e appearance-none.
-  const timeInputClass =
-    'w-full min-w-0 h-11 bg-black/5 rounded-xl px-2 sm:px-4 border-2 border-transparent text-sm sm:text-base transition-all duration-300 ease-[cubic-bezier(0.25,0.01,0.25,1)] focus:outline-none focus:border-black hover:border-black/20 appearance-none overflow-hidden'
-
-  const labelClass =
-    'block mb-1.5 text-sm font-semibold text-black/60 transition-colors duration-300 ease-[cubic-bezier(0.25,0.01,0.25,1)] peer-focus:text-black/75 group-hover:text-black/75'
+  const [error, setError] = useState("")
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    })
+    setFormData((current) => ({ ...current, [e.target.name]: e.target.value }))
   }
 
-  const nextStep = () => {
-    if (step < totalSteps) {
-      setStep((current) => current + 1)
-    }
-  }
-
-  const previousStep = () => {
-    if (step > 1) {
-      setStep((current) => current - 1)
-    }
-  }
+  const filled = (...values: string[]) => values.every((v) => v.trim() !== "")
 
   const isStepValid = () => {
-    if (step === 1) {
-      return (
-        formData.name &&
-        formData.email &&
-        formData.phone
+    const d = formData
+
+    if (step === 1) return filled(d.name, d.email, d.phone)
+    if (step === 2) return filled(d.role)
+
+    if (d.role === "passenger") {
+      return filled(d.origin, d.destination, d.departureTime, d.returnTime, d.frequency)
+    }
+
+    if (d.role === "driver") {
+      return filled(
+        d.driverOrigin,
+        d.driverDestination,
+        d.driverStartTime,
+        d.driverEndTime,
+        d.vehicleCapacity,
+        d.availability
       )
-    }
-
-    if (step === 2) {
-      return !!formData.role
-    }
-
-    if (step === 3) {
-      if (formData.role === 'passenger') {
-        return (
-          formData.origin &&
-          formData.destination &&
-          formData.departureTime &&
-          formData.returnTime &&
-          formData.frequency
-        )
-      }
-
-      if (formData.role === 'driver') {
-        return (
-          formData.driverOrigin &&
-          formData.driverDestination &&
-          formData.driverStartTime &&
-          formData.driverEndTime &&
-          formData.vehicleCapacity &&
-          formData.availability
-        )
-      }
     }
 
     return false
@@ -110,665 +159,409 @@ export default function WaitlistForm() {
 
     if (!isStepValid()) return
 
-    setIsSubmitting(true)
-
-    try {
-      await fetch(
-        `https://script.google.com/macros/s/AKfycbz2HdwAsgHKhwNJTU0F97WA-XYtHBG1OdG2zkLW7rEvVbs5xudbYNGO2EGHC2H3e3yoeg/exec?ts=${Date.now()}`,
-        {
-          method: 'POST',
-          mode: 'no-cors',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(formData),
-        }
-      )
-
-      setSubmitted(true)
-    } catch (error) {
-      console.error('Erro ao enviar:', error)
+    // Enter nas etapas 1 e 2 avança em vez de enviar
+    if (step < TOTAL_STEPS) {
+      setStep((s) => s + 1)
+      return
     }
 
-    setIsSubmitting(false)
+    setIsSubmitting(true)
+    setError("")
+
+    try {
+      await fetch(`${ENDPOINT}?ts=${Date.now()}`, {
+        method: "POST",
+        mode: "no-cors",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      })
+
+      setSubmitted(true)
+    } catch (err) {
+      console.error("Erro ao enviar:", err)
+      setError("Não conseguimos enviar o teu registo. Verifica a ligação e tenta outra vez.")
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   if (submitted) {
     return (
-      <section className="relative overflow-hidden">
-        <div className="relative z-10 px-4 sm:px-6 py-12">
-          <div className="max-w-6xl mx-auto">
-            <div className="bg-white rounded-2xl px-6 md:px-12 py-16 sm:py-24 border border-black/[0.06]">
-              <div className="text-center space-y-6 max-w-xl mx-auto">
-                <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-orange-50 text-orange-600">
-                  <Check className="h-6 w-6" strokeWidth={2.5} />
-                </div>
+      <main className="px-4 py-16 sm:px-6 sm:py-20">
+        <div className="mx-auto max-w-xl rounded-2xl border border-gray-200/70 bg-white px-6 py-12 md:px-12">
+          <span className="flex h-12 w-12 items-center justify-center rounded-full bg-gray-100 text-gray-700">
+            <Check className="h-5 w-5" strokeWidth={2.5} aria-hidden="true" />
+          </span>
 
-                <h1 className="text-3xl md:text-5xl font-bold text-black leading-tight tracking-tight text-balance">
-                  Obrigado por te juntares ao Baza!
-                </h1>
+          <h1 className="mt-6 text-3xl font-bold leading-tight tracking-tight text-black text-balance md:text-4xl">
+            Já estás na lista.
+          </h1>
 
-                <p className="text-base md:text-lg text-gray-500 leading-relaxed text-balance">
-                  Recebemos os teus dados. Em breve vais receber um e-mail de
-                  confirmação e serás dos primeiros a saber quando o Baza
-                  estiver disponível.
-                </p>
-              </div>
-            </div>
+          <p className="mt-4 text-lg leading-relaxed text-gray-500 text-balance">
+            Recebemos o teu registo. Vamos avisar-te quando a primeira rota estiver
+            pronta. Entrar na lista não reserva nem cobra um lugar.
+          </p>
+
+          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+            <Link
+              href="/#primeira-rota"
+              className="group inline-flex h-11 flex-1 items-center justify-center gap-2 rounded-xl bg-black px-6 font-medium text-white transition-colors hover:bg-gray-800"
+            >
+              Ver a primeira rota
+              <ArrowUpRight className="h-4 w-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+            </Link>
+
+            <Link
+              href="/"
+              className="inline-flex h-11 flex-1 items-center justify-center rounded-xl border border-black/[0.08] px-6 font-medium text-gray-700 transition-colors hover:bg-gray-50"
+            >
+              Voltar ao início
+            </Link>
           </div>
         </div>
-      </section>
+      </main>
     )
   }
 
-  const roles = [
-    {
-      value: 'passenger',
-      label: 'Passageiro',
-    },
-    {
-      value: 'driver',
-      label: 'Motorista',
-    },
-  ]
-
   return (
-    <section className="relative overflow-hidden">
-      <div className="relative z-10 px-4 sm:px-6 py-12">
-        <div className="max-w-6xl mx-auto">
-
-          <div className="bg-white rounded-2xl px-6 md:px-12 py-10 sm:py-16 border border-black/[0.06]">
-
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-16 items-center">
-
-              {/* ================================= */}
-              {/* LADO ESQUERDO */}
-              {/* ================================= */}
-
-              <div className="space-y-6">
-
-                <div className="inline-flex items-center gap-2 rounded-full bg-gray-50 px-4 py-1.5 text-sm font-medium text-gray-600">
-                  <span className="relative flex h-2 w-2">
-                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-gray-400 opacity-75" />
-                    <span className="relative inline-flex h-2 w-2 rounded-full bg-gray-500" />
-                  </span>
-
-                  Lista de espera
-                </div>
-
-                <h1 className="text-3xl md:text-5xl font-bold text-black leading-tight tracking-tight text-balance">
-                  Garante o teu lugar no Baza
-                </h1>
-
-                <p className="text-base md:text-lg text-gray-500 leading-relaxed text-balance">
-                  Entra na lista de espera e sê um dos primeiros a experimentar
-                  o Baza. Recebe acesso exclusivo, novidades e ofertas únicas.
-                </p>
-
-              </div>
-
-              {/* ================================= */}
-              {/* FORMULÁRIO */}
-              {/* ================================= */}
-
-              <form onSubmit={handleSubmit} className="w-full min-w-0">
-
-                {/* ================================= */}
-                {/* BARRA DE PROGRESSO */}
-                {/* ================================= */}
-
-                <div className="mb-8">
-
-                  <div className="flex items-center justify-between mb-3">
-                    <span className="text-sm font-medium text-black">
-                      Etapa {step} de {totalSteps}
-                    </span>
-
-                    <span className="text-sm text-gray-400">
-                      {Math.round((step / totalSteps) * 100)}%
-                    </span>
-                  </div>
-
-                  <div className="h-1.5 w-full rounded-full bg-black/5 overflow-hidden">
-                    <div
-                      className="h-full bg-black rounded-full transition-all duration-500 ease-out"
-                      style={{
-                        width: `${(step / totalSteps) * 100}%`,
-                      }}
-                    />
-                  </div>
-
-                </div>
-
-                {/* ================================= */}
-                {/* ETAPA 1 — DADOS PESSOAIS */}
-                {/* ================================= */}
-
-                {step === 1 && (
-                  <div className="space-y-5">
-
-                    <div className="mb-6">
-                      <h2 className="text-xl font-semibold text-black">
-                        Primeiro, fala-nos sobre ti
-                      </h2>
-
-                      <p className="text-sm text-gray-500 mt-1">
-                        Precisamos apenas de alguns dados básicos.
-                      </p>
-                    </div>
-
-                    <div className="input-group group w-full min-w-0">
-                      <label
-                        htmlFor="name"
-                        className={`${labelClass} peer`}
-                      >
-                        Nome
-                      </label>
-
-                      <input
-                        id="name"
-                        type="text"
-                        name="name"
-                        required
-                        className={`${inputClass} peer`}
-                        placeholder="Seu nome"
-                        onChange={handleChange}
-                        value={formData.name}
-                      />
-                    </div>
-
-                    <div className="input-group group w-full min-w-0">
-                      <label
-                        htmlFor="email"
-                        className={`${labelClass} peer`}
-                      >
-                        Email
-                      </label>
-
-                      <input
-                        id="email"
-                        type="email"
-                        name="email"
-                        required
-                        className={`${inputClass} peer`}
-                        placeholder="Seu email"
-                        onChange={handleChange}
-                        value={formData.email}
-                      />
-                    </div>
-
-                    <div className="input-group group w-full min-w-0">
-                      <label
-                        htmlFor="phone"
-                        className={`${labelClass} peer`}
-                      >
-                        Telefone
-                      </label>
-
-                      <input
-                        id="phone"
-                        type="tel"
-                        name="phone"
-                        required
-                        className={`${inputClass} peer`}
-                        placeholder="Seu número de telefone"
-                        onChange={handleChange}
-                        value={formData.phone}
-                      />
-                    </div>
-
-                  </div>
-                )}
-
-                {/* ================================= */}
-                {/* ETAPA 2 — PERFIL */}
-                {/* ================================= */}
-
-                {step === 2 && (
-                  <div className="space-y-5">
-
-                    <div className="mb-6">
-                      <h2 className="text-xl font-semibold text-black">
-                        Como vais usar o Baza?
-                      </h2>
-
-                      <p className="text-sm text-gray-500 mt-1">
-                        Escolhe a opção que melhor descreve o teu objetivo.
-                      </p>
-                    </div>
-
-                    <div className="w-full">
-
-                      <span className={labelClass}>
-                        Quero ser
-                      </span>
-
-                      <div className="grid grid-cols-2 gap-3 min-w-0">
-
-                        {roles.map(({ value, label }) => {
-
-                          const isSelected = formData.role === value
-
-                          return (
-                            <button
-                              key={value}
-                              type="button"
-                              onClick={() =>
-                                setFormData({
-                                  ...formData,
-                                  role: value,
-                                })
-                              }
-                              className={`min-w-0 flex items-center gap-2.5 rounded-xl border-2 py-3 px-4 text-sm font-medium transition-all duration-200 ${
-                                isSelected
-                                  ? 'border-black bg-white text-black'
-                                  : 'border-transparent bg-black/5 text-gray-600 hover:border-black/20'
-                              }`}
-                            >
-
-                              <span
-                                className={`flex h-4 w-4 shrink-0 items-center justify-center rounded-full border-2 ${
-                                  isSelected
-                                    ? 'border-black'
-                                    : 'border-gray-300'
-                                }`}
-                              >
-                                {isSelected && (
-                                  <span className="h-2 w-2 rounded-full bg-black" />
-                                )}
-                              </span>
-
-                              <span className="truncate">
-                                {label}
-                              </span>
-
-                            </button>
-                          )
-                        })}
-
-                      </div>
-
-                    </div>
-
-                  </div>
-                )}
-
-                {/* ================================= */}
-                {/* ETAPA 3 — PASSAGEIRO */}
-                {/* ================================= */}
-
-                {step === 3 && formData.role === 'passenger' && (
-                  <div className="space-y-5">
-
-                    <div className="mb-6">
-                      <h2 className="text-xl font-semibold text-black">
-                        Conta-nos sobre a tua rota
-                      </h2>
-
-                      <p className="text-sm text-gray-500 mt-1">
-                        Isto ajuda-nos a perceber onde existe maior procura.
-                      </p>
-                    </div>
-
-                    <div className="input-group group w-full min-w-0">
-                      <label
-                        htmlFor="origin"
-                        className={`${labelClass} peer`}
-                      >
-                        Onde moras?
-                      </label>
-
-                      <input
-                        id="origin"
-                        type="text"
-                        name="origin"
-                        required
-                        className={`${inputClass} peer`}
-                        placeholder="Ex.: Kilamba"
-                        onChange={handleChange}
-                        value={formData.origin}
-                      />
-                    </div>
-
-                    <div className="input-group group w-full min-w-0">
-                      <label
-                        htmlFor="destination"
-                        className={`${labelClass} peer`}
-                      >
-                        Para onde vais normalmente?
-                      </label>
-
-                      <input
-                        id="destination"
-                        type="text"
-                        name="destination"
-                        required
-                        className={`${inputClass} peer`}
-                        placeholder="Ex.: Universidade Gregório Semedo"
-                        onChange={handleChange}
-                        value={formData.destination}
-                      />
-                    </div>
-
-                    {/* HORÁRIOS DO PASSAGEIRO */}
-
-                    <div className="grid grid-cols-2 gap-2 sm:gap-3 min-w-0">
-
-                      <div className="input-group group w-full min-w-0">
-                        <label
-                          htmlFor="departureTime"
-                          className={`${labelClass} peer`}
-                        >
-                          Hora de ida
-                        </label>
-
-                        <input
-                          id="departureTime"
-                          type="time"
-                          name="departureTime"
-                          required
-                          className={`${timeInputClass} peer`}
-                          onChange={handleChange}
-                          value={formData.departureTime}
-                        />
-                      </div>
-
-                      <div className="input-group group w-full min-w-0">
-                        <label
-                          htmlFor="returnTime"
-                          className={`${labelClass} peer`}
-                        >
-                          Hora de volta
-                        </label>
-
-                        <input
-                          id="returnTime"
-                          type="time"
-                          name="returnTime"
-                          required
-                          className={`${timeInputClass} peer`}
-                          onChange={handleChange}
-                          value={formData.returnTime}
-                        />
-                      </div>
-
-                    </div>
-
-                    <div className="input-group group w-full min-w-0">
-                      <label
-                        htmlFor="frequency"
-                        className={`${labelClass} peer`}
-                      >
-                        Quantos dias por semana?
-                      </label>
-
-                      <select
-                        id="frequency"
-                        name="frequency"
-                        required
-                        className={`${inputClass} peer`}
-                        onChange={handleChange}
-                        value={formData.frequency}
-                      >
-                        <option value="">
-                          Seleciona uma opção
-                        </option>
-
-                        <option value="1-2">
-                          1–2 dias
-                        </option>
-
-                        <option value="3-4">
-                          3–4 dias
-                        </option>
-
-                        <option value="5">
-                          5 dias
-                        </option>
-
-                        <option value="6-7">
-                          6–7 dias
-                        </option>
-                      </select>
-                    </div>
-
-                  </div>
-                )}
-
-                {/* ================================= */}
-                {/* ETAPA 3 — MOTORISTA */}
-                {/* ================================= */}
-
-                {step === 3 && formData.role === 'driver' && (
-                  <div className="space-y-5">
-
-                    <div className="mb-6">
-                      <h2 className="text-xl font-semibold text-black">
-                        Conta-nos sobre as tuas viagens
-                      </h2>
-
-                      <p className="text-sm text-gray-500 mt-1">
-                        Queremos perceber onde podes operar com o Baza.
-                      </p>
-                    </div>
-
-                    <div className="input-group group w-full min-w-0">
-                      <label
-                        htmlFor="driverOrigin"
-                        className={`${labelClass} peer`}
-                      >
-                        Onde normalmente começas?
-                      </label>
-
-                      <input
-                        id="driverOrigin"
-                        type="text"
-                        name="driverOrigin"
-                        required
-                        className={`${inputClass} peer`}
-                        placeholder="Ex.: Kilamba"
-                        onChange={handleChange}
-                        value={formData.driverOrigin}
-                      />
-                    </div>
-
-                    <div className="input-group group w-full min-w-0">
-                      <label
-                        htmlFor="driverDestination"
-                        className={`${labelClass} peer`}
-                      >
-                        Para onde costumas ir?
-                      </label>
-
-                      <input
-                        id="driverDestination"
-                        type="text"
-                        name="driverDestination"
-                        required
-                        className={`${inputClass} peer`}
-                        placeholder="Ex.: Talatona"
-                        onChange={handleChange}
-                        value={formData.driverDestination}
-                      />
-                    </div>
-
-                    {/* HORÁRIOS DO MOTORISTA */}
-
-                    <div className="grid grid-cols-2 gap-2 sm:gap-3 min-w-0">
-
-                      <div className="input-group group w-full min-w-0">
-                        <label
-                          htmlFor="driverStartTime"
-                          className={`${labelClass} peer`}
-                        >
-                          Começa às
-                        </label>
-
-                        <input
-                          id="driverStartTime"
-                          type="time"
-                          name="driverStartTime"
-                          required
-                          className={`${timeInputClass} peer`}
-                          onChange={handleChange}
-                          value={formData.driverStartTime}
-                        />
-                      </div>
-
-                      <div className="input-group group w-full min-w-0">
-                        <label
-                          htmlFor="driverEndTime"
-                          className={`${labelClass} peer`}
-                        >
-                          Termina às
-                        </label>
-
-                        <input
-                          id="driverEndTime"
-                          type="time"
-                          name="driverEndTime"
-                          required
-                          className={`${timeInputClass} peer`}
-                          onChange={handleChange}
-                          value={formData.driverEndTime}
-                        />
-                      </div>
-
-                    </div>
-
-                    <div className="input-group group w-full min-w-0">
-                      <label
-                        htmlFor="vehicleCapacity"
-                        className={`${labelClass} peer`}
-                      >
-                        Quantos passageiros podes levar?
-                      </label>
-
-                      <select
-                        id="vehicleCapacity"
-                        name="vehicleCapacity"
-                        required
-                        className={`${inputClass} peer`}
-                        onChange={handleChange}
-                        value={formData.vehicleCapacity}
-                      >
-                        <option value="">
-                          Seleciona a capacidade
-                        </option>
-
-                        <option value="4">
-                          Até 4 passageiros
-                        </option>
-
-                        <option value="7">
-                          Até 7 passageiros
-                        </option>
-
-                        <option value="10">
-                          Até 10 passageiros
-                        </option>
-
-                        <option value="15+">
-                          Mais de 10 passageiros
-                        </option>
-                      </select>
-                    </div>
-
-                    <div className="input-group group w-full min-w-0">
-                      <label
-                        htmlFor="availability"
-                        className={`${labelClass} peer`}
-                      >
-                        Disponibilidade
-                      </label>
-
-                      <select
-                        id="availability"
-                        name="availability"
-                        required
-                        className={`${inputClass} peer`}
-                        onChange={handleChange}
-                        value={formData.availability}
-                      >
-                        <option value="">
-                          Seleciona uma opção
-                        </option>
-
-                        <option value="weekdays">
-                          Segunda a sexta
-                        </option>
-
-                        <option value="weekends">
-                          Fins de semana
-                        </option>
-
-                        <option value="both">
-                          Segunda a domingo
-                        </option>
-                      </select>
-                    </div>
-
-                  </div>
-                )}
-
-                {/* ================================= */}
-                {/* BOTÕES */}
-                {/* ================================= */}
-
-                <div className="flex items-center justify-between gap-3 pt-8">
-
-                  {step > 1 ? (
-                    <button
-                      type="button"
-                      onClick={previousStep}
-                      className="flex items-center justify-center gap-2 rounded-xl py-3.5 px-5 text-sm font-medium text-gray-600 hover:bg-black/5 transition-colors"
-                    >
-                      <ChevronLeft className="w-4 h-4" />
-                      Voltar
-                    </button>
-                  ) : (
-                    <div />
-                  )}
-
-                  {step < totalSteps ? (
-                    <button
-                      type="button"
-                      onClick={nextStep}
-                      disabled={!isStepValid()}
-                      className="group bg-black text-white hover:bg-gray-800 rounded-xl py-3.5 px-6 flex items-center justify-center gap-2 font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-                    >
-                      Continuar
-
-                      <ChevronRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
-                    </button>
-                  ) : (
-                    <button
-                      type="submit"
-                      disabled={
-                        isSubmitting || !isStepValid()
-                      }
-                      className="group bg-black text-white hover:bg-gray-800 rounded-xl py-3.5 px-6 flex items-center justify-center gap-2 font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-                    >
-                      {isSubmitting ? (
-                        'A processar…'
-                      ) : (
-                        <>
-                          Entrar na lista
-
-                          <ChevronRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
-                        </>
-                      )}
-                    </button>
-                  )}
-
-                </div>
-
-              </form>
-
+    <main className="px-4 py-16 sm:px-6 sm:py-20">
+      <div className="mx-auto grid max-w-6xl grid-cols-1 items-start gap-12 lg:grid-cols-[minmax(0,5fr)_minmax(0,6fr)] lg:gap-20">
+        {/* Esquerda */}
+        <div className="space-y-6 lg:sticky lg:top-28">
+          <div className="inline-flex items-center gap-2 rounded-full bg-gray-50 px-4 py-1.5 text-sm font-medium text-gray-600">
+            <span className="relative flex h-2 w-2">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-gray-400 opacity-75" />
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-gray-500" />
+            </span>
+            Lista de espera
+          </div>
+
+          <h1 className="text-3xl font-bold leading-tight tracking-tight text-black text-balance md:text-5xl">
+            Sê dos primeiros a viajar com o Baza.
+          </h1>
+
+          <p className="text-lg leading-relaxed text-gray-500 text-balance">
+            Deixa os teus dados e o teu trajecto. Usamos o teu registo para perceber
+            onde há mais procura e avisamos-te quando a primeira rota abrir.
+          </p>
+
+          <ul className="space-y-3 pt-2">
+            {benefits.map(({ icon: Icon, text }) => (
+              <li key={text} className="flex items-center gap-3 text-sm text-gray-600">
+                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-gray-100 text-gray-600">
+                  <Icon className="h-4 w-4" strokeWidth={2} aria-hidden="true" />
+                </span>
+                {text}
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        {/* Formulário */}
+        <form
+          onSubmit={handleSubmit}
+          className="w-full min-w-0 rounded-2xl border border-gray-200/70 bg-white p-6 md:p-8"
+        >
+          {/* Progresso */}
+          <div className="mb-8">
+            <div className="mb-3 flex items-center justify-between">
+              <span className={eyebrow}>
+                Etapa {step} de {TOTAL_STEPS}
+              </span>
+            </div>
+
+            <div className="grid grid-cols-3 gap-1.5" aria-hidden="true">
+              {Array.from({ length: TOTAL_STEPS }).map((_, i) => (
+                <span
+                  key={i}
+                  className={`h-1.5 rounded-full transition-colors duration-300 ${
+                    i < step ? "bg-black" : "bg-gray-100"
+                  }`}
+                />
+              ))}
             </div>
           </div>
-        </div>
+
+          {/* Etapa 1 */}
+          {step === 1 && (
+            <div className="space-y-5">
+              <StepHeader
+                title="Primeiro, fala-nos sobre ti"
+                description="Só precisamos de alguns dados básicos."
+              />
+
+              <Field
+                label="Nome"
+                id="name"
+                type="text"
+                autoComplete="name"
+                placeholder="O teu nome"
+                value={formData.name}
+                onChange={handleChange}
+              />
+
+              <Field
+                label="Email"
+                id="email"
+                type="email"
+                autoComplete="email"
+                placeholder="O teu email"
+                value={formData.email}
+                onChange={handleChange}
+              />
+
+              <Field
+                label="Telefone"
+                id="phone"
+                type="tel"
+                inputMode="tel"
+                autoComplete="tel"
+                placeholder="O teu número de telefone"
+                value={formData.phone}
+                onChange={handleChange}
+              />
+            </div>
+          )}
+
+          {/* Etapa 2 */}
+          {step === 2 && (
+            <div>
+              <StepHeader
+                title="Como vais usar o Baza?"
+                description="Escolhe a opção que melhor te descreve."
+              />
+
+              <div
+                role="radiogroup"
+                aria-label="Perfil"
+                className="grid grid-cols-1 gap-3 sm:grid-cols-2"
+              >
+                {roles.map(({ value, label, hint, icon: Icon }) => {
+                  const selected = formData.role === value
+
+                  return (
+                    <button
+                      key={value}
+                      type="button"
+                      role="radio"
+                      aria-checked={selected}
+                      onClick={() => setFormData((c) => ({ ...c, role: value }))}
+                      className={`flex flex-col gap-3 rounded-2xl border p-5 text-left transition-all ${
+                        selected
+                          ? "border-black bg-white ring-1 ring-black"
+                          : "border-gray-200/70 bg-gray-50 hover:border-gray-300"
+                      }`}
+                    >
+                      <div className="flex items-center justify-between">
+                        <span
+                          className={`flex h-9 w-9 items-center justify-center rounded-full ${
+                            selected ? "bg-black text-white" : "bg-gray-100 text-gray-600"
+                          }`}
+                        >
+                          <Icon className="h-4 w-4" strokeWidth={2} aria-hidden="true" />
+                        </span>
+
+                        <span
+                          className={`flex h-5 w-5 items-center justify-center rounded-full border ${
+                            selected ? "border-black bg-black" : "border-gray-300 bg-white"
+                          }`}
+                        >
+                          {selected && (
+                            <Check className="h-3 w-3 text-white" strokeWidth={3} aria-hidden="true" />
+                          )}
+                        </span>
+                      </div>
+
+                      <div>
+                        <strong className="block text-base font-semibold text-black">{label}</strong>
+                        <small className="mt-0.5 block text-sm text-gray-500">{hint}</small>
+                      </div>
+                    </button>
+                  )
+                })}
+              </div>
+            </div>
+          )}
+
+          {/* Etapa 3 — Passageiro */}
+          {step === 3 && formData.role === "passenger" && (
+            <div className="space-y-5">
+              <StepHeader
+                title="Conta-nos sobre o teu trajecto"
+                description="Ajuda-nos a perceber onde existe mais procura."
+              />
+
+              <Field
+                label="Onde moras?"
+                id="origin"
+                type="text"
+                placeholder="Ex.: Zango 0"
+                value={formData.origin}
+                onChange={handleChange}
+              />
+
+              <Field
+                label="Para onde vais normalmente?"
+                id="destination"
+                type="text"
+                placeholder="Ex.: Universidade Gregório Semedo"
+                value={formData.destination}
+                onChange={handleChange}
+              />
+
+              <div className="grid grid-cols-2 gap-3">
+                <Field
+                  label="Hora de ida"
+                  id="departureTime"
+                  type="time"
+                  className="px-2 text-sm sm:px-4 sm:text-base"
+                  value={formData.departureTime}
+                  onChange={handleChange}
+                />
+
+                <Field
+                  label="Hora de volta"
+                  id="returnTime"
+                  type="time"
+                  className="px-2 text-sm sm:px-4 sm:text-base"
+                  value={formData.returnTime}
+                  onChange={handleChange}
+                />
+              </div>
+
+              <SelectField
+                label="Quantos dias por semana?"
+                id="frequency"
+                placeholder="Seleciona uma opção"
+                value={formData.frequency}
+                onChange={handleChange}
+                options={[
+                  { value: "1-2", label: "1–2 dias" },
+                  { value: "3-4", label: "3–4 dias" },
+                  { value: "5", label: "5 dias" },
+                  { value: "6-7", label: "6–7 dias" },
+                ]}
+              />
+            </div>
+          )}
+
+          {/* Etapa 3 — Motorista */}
+          {step === 3 && formData.role === "driver" && (
+            <div className="space-y-5">
+              <StepHeader
+                title="Conta-nos sobre as tuas viagens"
+                description="Queremos perceber onde podes operar com o Baza."
+              />
+
+              <Field
+                label="Onde normalmente começas?"
+                id="driverOrigin"
+                type="text"
+                placeholder="Ex.: Zango 0"
+                value={formData.driverOrigin}
+                onChange={handleChange}
+              />
+
+              <Field
+                label="Para onde costumas ir?"
+                id="driverDestination"
+                type="text"
+                placeholder="Ex.: Talatona"
+                value={formData.driverDestination}
+                onChange={handleChange}
+              />
+
+              <div className="grid grid-cols-2 gap-3">
+                <Field
+                  label="Começas às"
+                  id="driverStartTime"
+                  type="time"
+                  className="px-2 text-sm sm:px-4 sm:text-base"
+                  value={formData.driverStartTime}
+                  onChange={handleChange}
+                />
+
+                <Field
+                  label="Terminas às"
+                  id="driverEndTime"
+                  type="time"
+                  className="px-2 text-sm sm:px-4 sm:text-base"
+                  value={formData.driverEndTime}
+                  onChange={handleChange}
+                />
+              </div>
+
+              <SelectField
+                label="Quantos passageiros podes levar?"
+                id="vehicleCapacity"
+                placeholder="Seleciona a capacidade"
+                value={formData.vehicleCapacity}
+                onChange={handleChange}
+                options={[
+                  { value: "4", label: "Até 4 passageiros" },
+                  { value: "7", label: "Até 7 passageiros" },
+                  { value: "10", label: "Até 10 passageiros" },
+                  { value: "15+", label: "Mais de 10 passageiros" },
+                ]}
+              />
+
+              <SelectField
+                label="Disponibilidade"
+                id="availability"
+                placeholder="Seleciona uma opção"
+                value={formData.availability}
+                onChange={handleChange}
+                options={[
+                  { value: "weekdays", label: "Segunda a sexta" },
+                  { value: "weekends", label: "Fins de semana" },
+                  { value: "both", label: "Segunda a domingo" },
+                ]}
+              />
+            </div>
+          )}
+
+          {/* Erro */}
+          {error && (
+            <p
+              role="alert"
+              className="mt-6 rounded-xl border border-red-100 bg-red-50 px-4 py-3 text-sm text-red-700"
+            >
+              {error}
+            </p>
+          )}
+
+          {/* Botões */}
+          <div className="mt-8 flex items-center justify-between gap-3 border-t border-gray-100 pt-6">
+            {step > 1 ? (
+              <button
+                type="button"
+                onClick={() => setStep((s) => s - 1)}
+                className="inline-flex items-center gap-2 rounded-xl px-4 py-3 text-sm font-medium text-gray-600 transition-colors hover:bg-gray-50"
+              >
+                <ArrowLeft className="h-4 w-4" aria-hidden="true" />
+                Voltar
+              </button>
+            ) : (
+              <span />
+            )}
+
+            <button
+              type="submit"
+              disabled={isSubmitting || !isStepValid()}
+              className="group inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-xl bg-black px-6 py-3 font-medium text-white transition-colors hover:bg-gray-800 disabled:cursor-not-allowed disabled:opacity-40"
+            >
+              {step < TOTAL_STEPS ? "Continuar" : isSubmitting ? "A enviar…" : "Entrar na lista"}
+              {!isSubmitting && (
+                <ArrowUpRight className="h-4 w-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+              )}
+            </button>
+          </div>
+
+          <p className="mt-4 text-xs text-gray-400">
+            Entrar na lista regista o teu interesse. Não reserva nem cobra um lugar.
+          </p>
+        </form>
       </div>
-    </section>
+    </main>
   )
 }

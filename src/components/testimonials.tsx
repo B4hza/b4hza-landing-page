@@ -1,4 +1,5 @@
-import { Quote } from "lucide-react"
+import { ArrowUpRight, Quote } from "lucide-react"
+import Link from "next/link"
 
 const testemunhos = [
   {
@@ -33,15 +34,7 @@ const testemunhos = [
   },
 ]
 
-// Paleta de avatares — tons neutros
-const avatarStyles = [
-  "bg-gray-100 text-gray-900",
-  "bg-gray-200 text-gray-900",
-  "bg-slate-100 text-slate-900",
-  "bg-zinc-100 text-zinc-900",
-  "bg-neutral-100 text-neutral-900",
-  "bg-stone-100 text-stone-900",
-]
+const eyebrow = "text-sm font-medium text-gray-600 uppercase tracking-wide"
 
 function getIniciais(nome: string) {
   const partes = nome.trim().split(" ")
@@ -54,65 +47,62 @@ function getIniciais(nome: string) {
 export default function TestimonialsPage() {
   return (
     <section
-      className="relative overflow-hidden py-8 sm:py-20"
+      className="scroll-mt-28 px-4 py-16 sm:py-20"
       id="muro-do-amor"
+      aria-labelledby="testimonials-title"
     >
-      <div className="relative z-10">
-        {/* Header */}
-        <div className="pb-5 text-center">
-          <div className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-sm font-medium text-gray-600 uppercase tracking-wide">
-            Muro do amor
+      <div className="mx-auto max-w-6xl">
+        {/* Heading */}
+        <div className="grid grid-cols-1 items-end gap-6 lg:grid-cols-2 lg:gap-16">
+          <div className="space-y-4">
+
+            <h2
+              id="testimonials-title"
+              className="text-balance text-3xl font-bold leading-tight tracking-tight text-black md:text-5xl"
+            >
+              O que esperam
+              <br />
+              do Baza.
+            </h2>
           </div>
-        </div>
 
-        {/* Título e descrição */}
-        <div className="text-center px-4 mb-16">
-          <h2 className="text-3xl md:text-5xl font-bold text-black leading-tight tracking-tight max-w-4xl mx-auto text-balance">
-            Por que as pessoas estão entusiasmadas com o Baza
-          </h2>
-
-          <p className="text-gray-500 text-lg mt-4 max-w-2xl mx-auto text-balance">
-            Lê o que os nossos primeiros apoiadores dizem sobre como o Baza pode
-            facilitar o seu dia a dia.
+          <p className="text-balance text-lg text-gray-500">
+            Opiniões de quem partilhou connosco, antes do lançamento, o que
+            gostaria de mudar na forma como se desloca todos os dias.
           </p>
         </div>
 
-        {/* Lista de testemunhos */}
-        <ul className="max-w-6xl mx-auto px-4 columns-1 md:columns-2 lg:columns-3 gap-5 list-none [column-fill:_balance]">
-          {testemunhos.map(({ nome, username, texto }, index) => (
-            <li
-              key={index}
-              className="group relative mb-5 break-inside-avoid rounded-2xl border border-gray-200/70 bg-white p-6 transition-all duration-200 hover:-translate-y-0.5"
-            >
-              <Quote
-                className="absolute top-5 right-5 h-8 w-8 text-gray-900/[0.05] transition-colors group-hover:text-gray-500/10"
-                strokeWidth={1.5}
-                fill="currentColor"
-              />
+        {/* Testemunhos */}
+        <ul className="mt-10 list-none columns-1 gap-5 md:mt-14 md:columns-2 lg:columns-3">
+          {testemunhos.map(({ nome, username, texto }) => (
+            <li key={username} className="mb-5 break-inside-avoid">
+              <figure className="flex flex-col rounded-2xl border border-gray-200/70 bg-white p-6 transition-all duration-200 hover:-translate-y-0.5 md:p-8">
+                <span className="mb-5 flex h-9 w-9 items-center justify-center rounded-full bg-gray-100 text-gray-600">
+                  <Quote className="h-4 w-4" strokeWidth={2} aria-hidden="true" />
+                </span>
 
-              <div className="relative flex items-center gap-3 mb-4">
-                <div
-                  className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-sm font-semibold ${
-                    avatarStyles[index % avatarStyles.length]
-                  }`}
-                >
-                  {getIniciais(nome)}
-                </div>
+                <blockquote className="leading-relaxed text-gray-600">
+                  {texto}
+                </blockquote>
 
-                <div>
-                  <div className="font-semibold text-black leading-tight">
-                    {nome}
-                  </div>
+                <figcaption className="mt-6 flex items-center gap-3 border-t border-gray-100 pt-5">
+                  <span
+                    aria-hidden="true"
+                    className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gray-100 text-sm font-semibold text-gray-700"
+                  >
+                    {getIniciais(nome)}
+                  </span>
 
-                  <div className="text-gray-400 text-sm">
-                    {username}
-                  </div>
-                </div>
-              </div>
-
-              <p className="relative text-gray-700 leading-relaxed">
-                {texto}
-              </p>
+                  <span className="flex min-w-0 flex-col">
+                    <strong className="truncate text-sm font-semibold text-gray-900">
+                      {nome}
+                    </strong>
+                    <small className="truncate text-sm text-gray-400">
+                      {username}
+                    </small>
+                  </span>
+                </figcaption>
+              </figure>
             </li>
           ))}
         </ul>

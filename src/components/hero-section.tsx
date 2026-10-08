@@ -1,5 +1,5 @@
 import Button from "./ui/button"
-import { ChevronRight } from "lucide-react"
+import { ArrowDown, ArrowUpRight, ChevronRight } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 
@@ -9,7 +9,7 @@ export default function HeroSection() {
       {/* Main Content */}
       <div className="relative z-10 px-4 sm:px-6 py-2 sm:py-12">
         <div className="max-w-6xl mx-auto">
-          <div className="relative bg-white rounded-2xl border border-gray-200/70 px-6 md:px-12 py-10 sm:py-20 mt-9 sm:mt-0 overflow-hidden">
+          <div className="relative bg-white rounded-3xl border border-gray-200/70 px-6 md:px-12 py-10 sm:py-20 mt-5 sm:mt-0 overflow-hidden">
             {/* Blob decorativo atrás da imagem */}
             <div className="pointer-events-none absolute -top-24 -right-24 h-96 w-96 rounded-full bg-gray-100/50 blur-3xl hidden lg:block" />
 
@@ -26,36 +26,33 @@ export default function HeroSection() {
                 </div>
 
                 <h1 className="text-3xl md:text-5xl font-bold text-black leading-tight tracking-tight text-balance">
-                  Chega de lutar por táxi todo dia
+                  Chega de lutar por táxi todos os dias
                 </h1>
 
                 <p className="text-base md:text-lg text-gray-500 leading-relaxed text-balance">
-                  O Baza é uma plataforma de transporte partilhado por assinatura em Angola.
-                  Reserva o teu lugar com antecedência, escolhe um plano semanal ou mensal, e
-                  viaja todos os dias com conforto, pontualidade e sem stress — sem filas,
-                  sem empurrões.
+                  O Baza é transporte partilhado para quem faz o mesmo caminho todos os dias, em Angola. Rotas, horários previstos e viagens mais simples — sem filas, sem empurrões.
                 </p>
 
-                <div className="space-y-3">
+                <div className="flex flex-col gap-3 sm:flex-row">
                   <Link
                     href="/waitlist"
-                    className="group w-full bg-black text-white hover:bg-gray-800 rounded-xl py-3.5 px-6 flex items-center justify-center gap-2 font-medium transition-colors"
+                    className="group flex flex-1 items-center justify-center gap-2 rounded-xl bg-black px-6 py-3.5 font-medium text-white transition-colors hover:bg-gray-800"
                   >
-                    Entrar na lista de espera
+                    Entrar na lista
 
-                    <ChevronRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
+                    <ArrowUpRight className="h-4 w-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
                   </Link>
 
                   <Button
-                    className="w-full bg-white text-gray-700 hover:bg-gray-50 border border-black/[0.08] rounded-xl py-3.5 px-6 flex items-center justify-center gap-2 font-medium transition-colors"
+                    className="group flex flex-1 items-center justify-center gap-2 rounded-xl bg-transparent px-6 py-3.5 font-medium text-gray-700 transition-colors hover:bg-gray-50"
                     onClick={() => {
-                      const target = document.getElementById("como-funciona")
+                      const target = document.getElementById("audience")
                       target?.scrollIntoView({ behavior: "smooth" })
                     }}
                   >
-                    Saiba como funciona
+                    Descobre o que muda
 
-                    <ChevronRight className="w-4 h-4" />
+                    <ArrowDown className="h-4 w-4 transition-transform group-hover:translate-y-0.5" />
                   </Button>
                 </div>
 
