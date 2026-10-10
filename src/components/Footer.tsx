@@ -38,8 +38,7 @@ export default function Footer() {
             </Link>
 
             <p className="mt-4 leading-relaxed text-gray-500">
-              Transporte partilhado para quem faz o mesmo caminho todos os dias.
-              Rotas fixas, horários previstos e viagens mais simples.
+              Serviço de transporte por assinatura, pensado para estudantes e trabalhadores em Angola. Viaja em percursos e horários definidos, com um transporte mais organizado e previsível para o teu dia a dia — sem filas nem empurrões.
             </p>
 
             <Link

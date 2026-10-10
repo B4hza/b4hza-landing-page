@@ -30,7 +30,7 @@ export default function HeroSection() {
                 </h1>
 
                 <p className="text-base md:text-lg text-gray-500 leading-relaxed text-balance">
-                  O Baza é transporte partilhado para quem faz o mesmo caminho todos os dias, em Angola. Rotas, horários previstos e viagens mais simples — sem filas, sem empurrões.
+                  O Baza é um serviço de transporte por assinatura, pensado para estudantes e trabalhadores em Angola. Viaja em percursos e horários definidos, com um transporte mais organizado e previsível para o teu dia a dia — sem filas nem empurrões.
                 </p>
 
                 <div className="flex flex-col gap-3 sm:flex-row">
