@@ -11,7 +11,7 @@ const exploreLinks = [
 
 const socials = [
   { href: "https://www.linkedin.com/company/bazaja/", label: "LinkedIn", icon: Linkedin },
-  { href: "https://www.instagram.com/bazaja_/", label: "Instagram", icon: Instagram },
+  { href: "https://www.instagram.com/b4hza/", label: "Instagram", icon: Instagram },
 ]
 
 const linkClass =
@@ -38,7 +38,7 @@ export default function Footer() {
             </Link>
 
             <p className="mt-4 leading-relaxed text-gray-500">
-              Serviço de transporte por assinatura, pensado para estudantes e trabalhadores em Angola. Viaja em percursos e horários definidos, com um transporte mais organizado e previsível para o teu dia a dia — sem filas nem empurrões.
+              Plataforma de mobilidade urbana por assinatura, pensada para estudantes e trabalhadores em Angola. Liga pessoas que fazem percursos semelhantes através de rotas e horários definidos, tornando as deslocações diárias mais organizadas e previsíveis.
             </p>
 
             <Link
