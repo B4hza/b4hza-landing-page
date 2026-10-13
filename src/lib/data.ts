@@ -535,9 +535,8 @@ export const articles: Article[] = [
     slug: "quanto-custa-o-baza",
     category: "payments",
     popular: true,
-    question: "Quanto custa utilizar o Baza?",
-    answer:
-      "Os preços ainda não foram definidos publicamente para a primeira operação. O valor dependerá da rota, frequência de utilização, tipo de plano e estrutura da operação. Antes da abertura das reservas, o preço e todas as condições relevantes deverão ser apresentados de forma clara.",
+    question: "Quanto vai custar?",
+    answer: "O Baza pretende manter os preços próximos dos praticados nos transportes tradicionais, com uma pequena taxa adicional pelo serviço de transporte partilhado e pela organização das rotas e horários. Os preços e os planos de assinatura serão divulgados antes do lançamento."
   },
 
   {

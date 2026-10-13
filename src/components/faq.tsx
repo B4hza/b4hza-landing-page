@@ -32,8 +32,7 @@ const faqs = [
   },
   {
     question: "Quanto vai custar?",
-    answer:
-      "Ainda não definimos os preços. Vamos comunicá-los antes da abertura, a quem estiver na lista de espera.",
+    answer: "O preço será semelhante ao dos transportes tradicionais, com apenas uma taxa adicional básica pelo serviço. Os valores serão comunicados antes do lançamento."
   },
   {
     question: "O serviço é porta-a-porta?",
@@ -109,15 +108,13 @@ export default function FaqSection() {
                     </span>
 
                     <span
-                      className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-full transition-colors ${
-                        isOpen ? "bg-black text-white" : "bg-gray-100 text-gray-500"
-                      }`}
+                      className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-full transition-colors ${isOpen ? "bg-black text-white" : "bg-gray-100 text-gray-500"
+                        }`}
                     >
                       <Plus
                         aria-hidden="true"
-                        className={`h-4 w-4 transition-transform duration-300 ${
-                          isOpen ? "rotate-45" : "rotate-0"
-                        }`}
+                        className={`h-4 w-4 transition-transform duration-300 ${isOpen ? "rotate-45" : "rotate-0"
+                          }`}
                         strokeWidth={2.5}
                       />
                     </span>
@@ -128,9 +125,8 @@ export default function FaqSection() {
                   id={`faq-panel-${index}`}
                   role="region"
                   aria-labelledby={`faq-trigger-${index}`}
-                  className={`grid transition-all duration-300 ease-in-out ${
-                    isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
-                  }`}
+                  className={`grid transition-all duration-300 ease-in-out ${isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
+                    }`}
                 >
                   <div className="overflow-hidden">
                     <p className="px-6 pb-5 pr-12 leading-relaxed text-gray-500">
