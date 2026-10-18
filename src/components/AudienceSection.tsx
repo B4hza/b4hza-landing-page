@@ -219,7 +219,7 @@ export function AudienceSection() {
           <article className="flex flex-col rounded-2xl border border-gray-200/70 bg-white p-6 md:p-8">
             <div className="flex items-center justify-between">
               <span className="text-xs font-bold uppercase tracking-wide text-gray-600">
-                Com Baza
+                Com o Baza
               </span>
               <span className="flex h-9 w-9 items-center justify-center rounded-full bg-gray-100 text-gray-600">
                 <CalendarCheck
@@ -233,13 +233,13 @@ export function AudienceSection() {
             <div className="my-5 h-px w-full bg-gray-100" />
 
             <strong className="mb-4 text-xl font-semibold text-black">
-              A viagem já está organizada.
+              O percurso fica organizado.
             </strong>
 
             <ul className="space-y-3 text-gray-600">
               {[
-                "Rota e paragens definidas",
-                "Horário de chegada previsto",
+                "Saber onde apanhar o transporte",
+                "Ter uma ideia de quando chegas",
                 "Um dia mais previsível",
               ].map((item) => (
                 <li key={item} className="flex items-center gap-3 text-sm">

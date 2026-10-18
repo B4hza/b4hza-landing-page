@@ -228,13 +228,6 @@ export default function WaitlistForm() {
       <div className="mx-auto grid max-w-6xl grid-cols-1 items-start gap-12 lg:grid-cols-[minmax(0,5fr)_minmax(0,6fr)] lg:gap-20">
         {/* Esquerda */}
         <div className="space-y-6 lg:sticky lg:top-28">
-          <div className="inline-flex items-center gap-2 rounded-full bg-gray-50 px-4 py-1.5 text-sm font-medium text-gray-600">
-            <span className="relative flex h-2 w-2">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-gray-400 opacity-75" />
-              <span className="relative inline-flex h-2 w-2 rounded-full bg-gray-500" />
-            </span>
-            Lista de espera
-          </div>
 
           <h1 className="text-3xl font-bold leading-tight tracking-tight text-black text-balance md:text-5xl">
             Sê dos primeiros a viajar com o Baza.

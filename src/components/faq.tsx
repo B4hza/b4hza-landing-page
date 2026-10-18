@@ -8,7 +8,7 @@ const faqs = [
   {
     question: "O que é o Baza e como funciona?",
     answer:
-      "O Baza é transporte partilhado para quem faz o mesmo caminho todos os dias, como estudantes e trabalhadores. Funciona com rotas, paragens e horários definidos, em vez de procurares transporte a cada saída.",
+      "O Baza é um serviço de transporte por assinatura para estudantes e trabalhadores que fazem percursos semelhantes diariamente. Funciona através de rotas, paragens e horários definidos, tornando as deslocações mais organizadas e previsíveis.",
   },
   {
     question: "O Baza já está disponível?",
@@ -32,7 +32,7 @@ const faqs = [
   },
   {
     question: "Quanto vai custar?",
-    answer: "O preço será semelhante ao dos transportes tradicionais, com apenas uma taxa adicional básica pelo serviço. Os valores serão comunicados antes do lançamento."
+    answer: "Ainda estamos a definir os preços. Os valores serão comunicados antes da abertura do serviço."
   },
   {
     question: "O serviço é porta-a-porta?",

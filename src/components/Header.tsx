@@ -124,7 +124,7 @@ export default function Header() {
               href="/waitlist"
               className="group inline-flex items-center gap-2.5 rounded-2xl bg-black py-1.5 pl-5 pr-1.5 text-sm font-medium text-white transition-all hover:bg-gray-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 active:scale-[0.97]"
             >
-              Quero Baza
+              Quero
               <span className="flex h-8 w-8 items-center justify-center rounded-full bg-white/15 transition-colors group-hover:bg-white group-hover:text-black">
                 <ArrowUpRight
                   className="h-4 w-4 transition-transform duration-200 group-hover:rotate-12"

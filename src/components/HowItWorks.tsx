@@ -145,8 +145,8 @@ export default function HowItWorks() {
           <StepCard
             number="03"
             icon={BusFront}
-            title="Só precisas de aparecer"
-            body="No dia, sabes onde embarcar e a que horas chegas. Menos espera, menos incerteza."
+            title="Viaja com mais previsibilidade"
+            body="Quando o serviço arrancar, saberás onde embarcar e qual o horário previsto."
           >
             <div className="relative mb-2 w-full">
               <div className="absolute inset-0 z-10 translate-y-6 scale-[0.94] rounded-xl border border-gray-100 bg-white" />
@@ -164,10 +164,10 @@ export default function HowItWorks() {
 
                 <div className="flex-1">
                   <p className="text-sm font-medium leading-snug text-gray-900">
-                    O teu transporte chega em 3 minutos
+                    Ponto de embarque definido
                   </p>
                   <p className="mt-0.5 text-xs text-gray-500">
-                    Sai de casa com calma, o motorista já vai a caminho.
+                    Horário previsto para o teu percurso.
                   </p>
                 </div>
               </div>

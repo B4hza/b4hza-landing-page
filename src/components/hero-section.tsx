@@ -1,5 +1,5 @@
 import Button from "./ui/button"
-import { ArrowDown, ArrowUpRight, ChevronRight } from "lucide-react"
+import { ArrowDown, ArrowUpRight } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 
@@ -9,55 +9,47 @@ export default function HeroSection() {
       {/* Main Content */}
       <div className="relative z-10 px-4 sm:px-6 py-2 sm:py-12">
         <div className="max-w-6xl mx-auto">
-          <div className="relative bg-white rounded-3xl border border-gray-200/70 px-6 md:px-12 py-10 sm:py-20 mt-5 sm:mt-0 overflow-hidden">
+          <div className="relative overflow-hidden rounded-[2rem] border border-gray-200/80 bg-white px-6 py-10 mt-5 sm:mt-0 sm:px-10 sm:py-16 md:px-12 lg:py-20">
             {/* Blob decorativo atrás da imagem */}
             <div className="pointer-events-none absolute -top-24 -right-24 h-96 w-96 rounded-full bg-gray-100/50 blur-3xl hidden lg:block" />
 
             <div className="relative grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-16 items-center">
               {/* Left Column */}
               <div className="space-y-8">
-                <div className="inline-flex items-center gap-2 rounded-full bg-gray-50 px-4 py-1.5 text-sm font-medium text-gray-600">
-                  <span className="relative flex h-2 w-2">
-                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-gray-400 opacity-75" />
-                    <span className="relative inline-flex h-2 w-2 rounded-full bg-gray-500" />
-                  </span>
 
-                  Em breve
-                </div>
-
-                <h1 className="text-3xl md:text-5xl font-bold text-black leading-tight tracking-tight text-balance">
+                <h1 className="max-w-xl text-4xl font-semibold leading-[1.06] tracking-[-0.045em] text-black text-balance sm:text-5xl lg:text-[3.5rem]">
                   Chega de lutar por táxi todos os dias
                 </h1>
 
-                <p className="text-base md:text-lg text-gray-500 leading-relaxed text-balance">
-                  O Baza é uma plataforma de mobilidade urbana por assinatura, pensada para estudantes e trabalhadores em Angola. Liga pessoas que fazem percursos semelhantes através de rotas e horários definidos, tornando as deslocações diárias mais organizadas e previsíveis.
+                <p className="max-w-xl text-base leading-7 text-gray-600 text-balance sm:text-lg sm:leading-8">
+                  O Baza é um serviço de transporte por assinatura para estudantes e trabalhadores em Angola. Estamos a preparar as primeiras rotas e horários definidos para tornar as deslocações diárias mais organizadas e previsíveis.
                 </p>
 
                 <div className="flex flex-col gap-3 sm:flex-row">
                   <Link
                     href="/waitlist"
-                    className="group flex flex-1 items-center justify-center gap-2 rounded-xl bg-black px-6 py-3.5 font-medium text-white transition-colors hover:bg-gray-800"
+                    className="group flex min-h-12 flex-1 items-center justify-center gap-2 rounded-xl bg-black px-6 py-3.5 font-medium text-white transition-all hover:bg-gray-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 active:scale-[0.98]"
                   >
-                    Entrar na lista
+                    Tenho interesse
 
                     <ArrowUpRight className="h-4 w-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
                   </Link>
 
                   <Button
-                    className="group flex flex-1 items-center justify-center gap-2 rounded-xl bg-transparent px-6 py-3.5 font-medium text-gray-700 transition-colors hover:bg-gray-50"
+                    className="group flex min-h-12 flex-1 items-center justify-center gap-2 rounded-xl px-6 py-3.5 font-medium text-gray-700 transition-colors hover:bg-gray-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2"
                     onClick={() => {
                       const target = document.getElementById("audience")
                       target?.scrollIntoView({ behavior: "smooth" })
                     }}
                   >
-                    Descobre o que muda
+                    Descobre o Baza
 
                     <ArrowDown className="h-4 w-4 transition-transform group-hover:translate-y-0.5" />
                   </Button>
                 </div>
 
                 <p className="text-sm text-gray-400">
-                  Fica entre os primeiros a saber quando lançarmos
+                  Partilhar o teu trajecto ajuda-nos a perceber onde faz mais falta.
                 </p>
               </div>
 

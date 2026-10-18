@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Inter_Tight, Archivo, Google_Sans } from "next/font/google";
+import { Inter, Inter_Tight, Archivo } from "next/font/google";
 import Header from "@/components/Header";
 import "./globals.css";
 import Footer from "@/components/Footer";
@@ -19,15 +19,10 @@ const archivo = Archivo({
   subsets: ["latin"],
 })
 
-const google_sans = Google_Sans({
-  variable: "--font-google-sans",
-  subsets: ["latin"]
-})
-
 export const metadata = {
-  title: "Baza - Transporte confiável e recorrente em Angola",
+  title: "Baza — Menos correria. Mais previsibilidade.",
   description:
-    "Chega de lutar por táxi todo dia. Com o Baza, tu tens transporte garantido todos os dias com rotas fixas e seguras.",
+    "O Baza prepara rotas e horários definidos para tornar as deslocações diárias em Angola mais organizadas e previsíveis.",
   keywords: [
     "Baza",
     "Transporte Angola",
@@ -38,17 +33,16 @@ export const metadata = {
     "Rotas fixas",
     "Mobilidade urbana",
     "Luanda",
-    "Cacuaco",
   ],
   openGraph: {
-    title: "Baza - Transporte recorrente em Angola",
+    title: "Baza — Menos correria. Mais previsibilidade.",
     description:
-      "Chega de lutar por táxi todo dia. Com o Baza, tu tens transporte garantido todos os dias com rotas fixas e seguras.",
+      "O Baza prepara rotas e horários definidos para tornar as deslocações diárias em Angola mais organizadas e previsíveis.",
     url: "https://bazaja.com",
     siteName: "Baza",
     images: [
       {
-        url: "https://bazaja.com/favicon.png",
+        url: "https://bazaja.com/icon.png",
         width: 1200,
         height: 630,
         alt: "Baza - Transporte urbano em Angola",
@@ -82,7 +76,7 @@ export default function RootLayout({
   return (
     <html lang="pt" className={archivo.variable}>
       <body
-        className={`${archivo.variable} ${inter.variable} ${google_sans.variable} antialiased relative`}
+        className={`${archivo.variable} ${inter.variable} ${inter_tight.variable} antialiased relative`}
       >
         <GuideGrid />
         <Header />

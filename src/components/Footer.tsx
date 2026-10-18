@@ -38,7 +38,7 @@ export default function Footer() {
             </Link>
 
             <p className="mt-4 leading-relaxed text-gray-500">
-              Plataforma de mobilidade urbana por assinatura, pensada para estudantes e trabalhadores em Angola. Liga pessoas que fazem percursos semelhantes através de rotas e horários definidos, tornando as deslocações diárias mais organizadas e previsíveis.
+              Serviço de transporte por assinatura para estudantes e trabalhadores em Angola. Organiza deslocações através de percursos e horários definidos, tornando o dia a dia mais simples e previsível.
             </p>
 
             <Link

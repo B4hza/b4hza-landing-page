@@ -12,7 +12,7 @@ const testemunhos = [
     nome: "Emeliano Coxe",
     username: "@emeliano",
     texto:
-      "Vai facilitar e muito, chegar cedo no trabalho, evitar transtorno. Todos os dias perco muito tempo à espera de transporte e ainda chego stressado. Com o Baza, já sei que terei o meu lugar garantido e posso planear melhor o meu dia.",
+      "Vai facilitar e muito, chegar cedo no trabalho, evitar transtorno. Todos os dias perco muito tempo à espera de transporte e ainda chego stressado. Espero que o Baza me ajude a planear melhor o meu dia.",
   },
   {
     nome: "Bráulio Ralha",
@@ -81,7 +81,7 @@ export default function TestimonialsPage() {
                   <Quote className="h-4 w-4" strokeWidth={2} aria-hidden="true" />
                 </span>
 
-                <blockquote className="leading-relaxed text-gray-600">
+                <blockquote className="leading-relaxed text-gray-600 font-medium">
                   {texto}
                 </blockquote>
 
