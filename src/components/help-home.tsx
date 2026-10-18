@@ -46,7 +46,7 @@ export default function HelpHome() {
             Informação clara sobre o serviço, as rotas e as reservas.
           </p>
 
-          <label className="mt-4 flex items-center gap-3 rounded-2xl border border-gray-200/70 bg-white px-5 py-4 text-left transition-colors focus-within:border-black/20">
+          <label className="mt-4 flex items-center gap-3 rounded-2xl border border-gray-200/70 bg-white px-5 py-4 text-left transition-colors">
             <Search size={18} aria-hidden="true" className="shrink-0 text-gray-400" />
             <input
               type="search"
@@ -54,7 +54,7 @@ export default function HelpHome() {
               onChange={(e) => setQuery(e.target.value)}
               placeholder="Pesquisar artigos"
               aria-label="Pesquisar artigos de ajuda"
-              className="w-full bg-transparent text-base text-gray-900 outline-none placeholder:text-gray-400"
+              className="min-w-0 w-full border-0 bg-transparent p-0 text-[15px] text-gray-900 outline-none focus-visible:outline-none focus-visible:ring-0 placeholder:text-gray-400"
             />
           </label>
         </div>

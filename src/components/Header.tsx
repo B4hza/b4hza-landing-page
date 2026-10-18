@@ -77,7 +77,7 @@ export default function Header() {
       : pathname.startsWith(href)
 
   return (
-    <header className="sticky top-4 z-20 px-4 sm:px-6">
+    <header className="sticky top-4 z-40 px-4 sm:px-6">
       <div className="relative mx-auto max-w-6xl">
         <div className="flex items-center justify-between gap-6 rounded-3xl border border-gray-200/70 bg-white/80 py-3 pl-6 pr-3 backdrop-blur-md">
           {/* Logo */}
